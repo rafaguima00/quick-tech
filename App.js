@@ -1,20 +1,27 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native'
+import StackNavigator from './src/Rotas/stackNavigator';
+import { useFonts, Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
+import { InfoProvider } from './src/Context/GlobalContext';
 
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_700Bold
+  })
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <InfoProvider>
+      <NavigationContainer>
+        <StatusBar style='auto' />
+        <StackNavigator />
+      </NavigationContainer>
+    </InfoProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
