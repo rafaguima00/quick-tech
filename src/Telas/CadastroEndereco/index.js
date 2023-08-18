@@ -1,27 +1,48 @@
 import { TextInput, Snackbar } from "react-native-paper";
-import { Text, KeyboardAvoidingView, View, TouchableOpacity } from 'react-native'
+import { Text, KeyboardAvoidingView, View, TouchableOpacity, ScrollView, Modal } from 'react-native'
 import estilos from "./style";
 import { MaterialIcons } from 'react-native-vector-icons'
-import { useState } from "react";
-import { tema } from "../../Tema";
+import { useState, useContext } from "react";
+import { temaEscuro } from "../../Tema";
 import { Botao } from '../../Componentes/botao'
-import { ScrollView } from "react-native";
+import ModalCarregando from "./Modal/modal";
+import { GlobalContext } from '../../Context/GlobalContext'
 
-const CadastroEndereco = ({navigation}) => {
+const CadastroEndereco = ({ navigation }) => {
 
-    const [dadosEndereco, setDadosEndereco] = useState({
-        cep: '',
-        cidade: '',
-        estado: '',
-        rua: '',
-        bairro: '',
-        numero: '',
-        complemento: ''
-    })
+    const { dadosEndereco, setDadosEndereco } = useContext(GlobalContext)
+    const { 
+        bairro, 
+        cep, 
+        cidade, 
+        complemento, 
+        estado, 
+        numero, 
+        rua } = dadosEndereco;
 
-    const { bairro, cep, cidade, complemento, estado, numero, rua } = dadosEndereco
+    const { corPrimaria } = temaEscuro
 
-    const { corPrimaria } = tema
+    const [carregando, setCarregando] = useState(false)
+    const [erro, setErro] = useState(false)
+    const [mensagemErro, setMensagemErro] = useState('')
+    const [snackVisible, setSnackVisible] = useState(false)
+
+    function validarDados() {
+        if (
+            bairro == '' ||
+            cep == '' ||
+            cidade == '' ||
+            estado == '' ||
+            numero == '' ||
+            rua == '') {
+            setErro(true)
+            setSnackVisible(true)
+            setMensagemErro('Preencha os campos vazios')
+        } else {
+            alert(JSON.stringify(dadosEndereco))
+            navigation.replace('Menu')
+        }
+    }
 
     return (
         <KeyboardAvoidingView
@@ -33,7 +54,7 @@ const CadastroEndereco = ({navigation}) => {
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <MaterialIcons name="arrow-back" size={32} />
                     </TouchableOpacity>
-                    <Text style={estilos.textTop}>Preencha os campos abaixo</Text>
+                    <Text style={estilos.textTop}>Preencha os dados do seu endereço</Text>
                 </View>
                 <View style={estilos.form}>
                     <TextInput
@@ -43,53 +64,59 @@ const CadastroEndereco = ({navigation}) => {
                         value={cep}
                         onChangeText={text => setDadosEndereco({ ...dadosEndereco, cep: text })}
                         activeOutlineColor={corPrimaria}
+                        error={cep == '' ? erro : ''}
                     />
                     <TextInput
                         label='Cidade'
                         mode='outlined'
                         autoCapitalize='words'
-                        value={cep}
-                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, cep: text })}
+                        value={cidade}
+                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, cidade: text })}
                         activeOutlineColor={corPrimaria}
+                        error={cidade == '' ? erro : ''}
                     />
                     <TextInput
                         label='Estado'
                         mode='outlined'
                         autoCapitalize='words'
-                        value={cep}
-                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, cep: text })}
+                        value={estado}
+                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, estado: text })}
                         activeOutlineColor={corPrimaria}
+                        error={estado == '' ? erro : ''}
                     />
                     <TextInput
                         label='Bairro'
                         mode='outlined'
                         autoCapitalize='words'
-                        value={cep}
-                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, cep: text })}
+                        value={bairro}
+                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, bairro: text })}
                         activeOutlineColor={corPrimaria}
+                        error={bairro == '' ? erro : ''}
                     />
                     <TextInput
                         label='Rua'
                         mode='outlined'
                         autoCapitalize='words'
-                        value={cep}
-                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, cep: text })}
+                        value={rua}
+                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, rua: text })}
                         activeOutlineColor={corPrimaria}
+                        error={rua == '' ? erro : ''}
                     />
                     <TextInput
                         label='Número'
                         mode='outlined'
                         keyboardType='number-pad'
-                        value={cep}
-                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, cep: text })}
+                        value={numero}
+                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, numero: text })}
                         activeOutlineColor={corPrimaria}
+                        error={numero == '' ? erro : ''}
                     />
 
                     <TextInput
-                        label='Complemento'
+                        label='Complemento (opcional)'
                         mode='outlined'
-                        value={cep}
-                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, cep: text })}
+                        value={complemento}
+                        onChangeText={text => setDadosEndereco({ ...dadosEndereco, complemento: text })}
                         activeOutlineColor={corPrimaria}
                     />
                 </View>
@@ -98,9 +125,26 @@ const CadastroEndereco = ({navigation}) => {
                     corDeFundo={corPrimaria}
                     estilo={estilos.botao}
                     negrito
-                    aoPressionar={() => navigation.navigate('')}
+                    aoPressionar={validarDados}
                 />
+                <Modal
+                    visible={carregando}
+                    transparent={true}
+                    onRequestClose={() => { }}
+                    animationType='fade'
+                >
+                    <ModalCarregando />
+                </Modal>
             </ScrollView>
+            <Snackbar
+                visible={snackVisible}
+                onDismiss={() => setSnackVisible(false)}
+                action={{
+                    label: 'Close'
+                }}
+            >
+                {mensagemErro}
+            </Snackbar>
         </KeyboardAvoidingView>
     )
 }

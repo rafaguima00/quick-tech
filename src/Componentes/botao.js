@@ -1,9 +1,9 @@
 import { TouchableOpacity, Text } from "react-native";
-import { tema } from "../Tema";
+import { temaEscuro } from "../Tema";
 
-const { fonteNegrito, fonteRegular } = tema;
+const { fonteNegrito, fonteRegular } = temaEscuro;
 
-export const Botao = ({ 
+export const Botao = ({
     children,
     negrito = false,
     corDeFundo,
@@ -13,15 +13,24 @@ export const Botao = ({
 }) => {
     return (
         <TouchableOpacity
-            style={[estilo, {
-                backgroundColor: corDeFundo,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 8,
-            }]}
+            style={[
+                estilo,
+                {
+                    backgroundColor: corDeFundo,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: 8,
+                    shadowColor: '#000',
+                    shadowOpacity: 0.6,
+                    shadowOffset: {
+                        width: 0,
+                        height: 2
+                    },
+                    shadowRadius: 2
+                }]}
             disabled={desabilitado}
             onPress={aoPressionar}
-            activeOpacity={0.5}
+            activeOpacity={0.9}
         >
             <Text
                 style={{

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import { tema } from '../../Tema'
+import { temaEscuro } from '../../Tema'
 
-const { fonteRegular } = tema
+const { fonteRegular } = temaEscuro
 
 const estilos = StyleSheet.create({
     container: {

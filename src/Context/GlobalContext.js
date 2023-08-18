@@ -5,16 +5,28 @@ export const GlobalContext = createContext({})
 export function InfoProvider({ children }) {
     
     const [dados, setDados] = useState({
+        nome: '',
         email: '',
-        senha: ''
+        cel: '',
+        cpf: '',
+        senha: '',
+        confirmaSenha: ''
     })
 
-    const {email, senha} = dados
+    const [dadosEndereco, setDadosEndereco] = useState({
+        cep: '',
+        cidade: '',
+        estado: '',
+        rua: '',
+        bairro: '',
+        numero: '',
+        complemento: ''
+    })
 
     return (
         <GlobalContext.Provider
             value={{
-                email, senha, dados, setDados
+                dados, setDados, dadosEndereco, setDadosEndereco
             }}
         >
             {children}

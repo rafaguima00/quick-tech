@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native'
 import StackNavigator from './src/Rotas/stackNavigator';
 import { useFonts, Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
 import { InfoProvider } from './src/Context/GlobalContext';
+import { PesquisaProvider } from './src/Context/PesquisaContext'
 
 export default function App() {
 
@@ -18,10 +18,10 @@ export default function App() {
 
   return (
     <InfoProvider>
-      <NavigationContainer>
+      <PesquisaProvider>
         <StatusBar style='auto' />
         <StackNavigator />
-      </NavigationContainer>
+      </PesquisaProvider>
     </InfoProvider>
   );
 }

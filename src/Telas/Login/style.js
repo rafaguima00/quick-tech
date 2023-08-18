@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import { tema } from "../../Tema";
+import { temaEscuro } from "../../Tema";
 
-const { fonteRegular } = tema;
+const { fonteRegular } = temaEscuro;
 
 const estilos = StyleSheet.create({
     container: {
@@ -24,12 +24,13 @@ const estilos = StyleSheet.create({
     },
     textoCadastro: {
         fontFamily: fonteRegular,
-        fontSize: 14
+        fontSize: 14.5
     },
     textoDestaque: {
         color: '#3968B4',
         textDecorationLine: 'underline',
-        fontFamily: fonteRegular
+        fontFamily: fonteRegular,
+        fontSize: 14.5
     }
 })
 

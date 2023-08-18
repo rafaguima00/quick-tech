@@ -1,17 +1,18 @@
-import { Text, SafeAreaView, Image, KeyboardAvoidingView, Platform, View } from 'react-native'
+import { Text, Image, KeyboardAvoidingView, Platform, View } from 'react-native'
 import { TextInput, Snackbar } from 'react-native-paper'
 import { Botao } from '../../Componentes/botao';
-import { tema } from '../../Tema';
+import { temaEscuro } from '../../Tema';
 import estilos from './style';
 import { TouchableOpacity } from 'react-native';
 import { useState, useContext } from 'react'
 import { GlobalContext } from '../../Context/GlobalContext'
 
-const { corPrimaria } = tema;
+const { corPrimaria } = temaEscuro;
 
 const Login = ({ navigation }) => {
 
-    const { email, senha, dados, setDados } = useContext(GlobalContext)
+    const { dados, setDados } = useContext(GlobalContext)
+    const { email, senha } = dados;
 
     const [erro, setErro] = useState(false)
     const [mensagemErro, setMensagemErro] = useState('')
@@ -22,7 +23,7 @@ const Login = ({ navigation }) => {
             setErro(true)
             setSnackVisible(true)
             setMensagemErro('Preencha os campos vazios')
-        } else if (email !== 'rafael@email.com' || senha !== '123456') {
+        } else if (email !== 'teste@email.com' || senha !== '123456') {
             setErro(true)
             setSnackVisible(true)
             setMensagemErro('E-mail ou senha não conferem')
@@ -37,9 +38,7 @@ const Login = ({ navigation }) => {
             style={estilos.container}
         >
             <Image source={require('../../../assets/logo.png')} />
-            <View
-                style={estilos.form}
-            >
+            <View style={estilos.form}>
                 <TextInput
                     label='E-mail'
                     mode='outlined'
@@ -67,7 +66,9 @@ const Login = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity>
-                <Text style={[estilos.textoDestaque, { textDecorationLine: 'none', marginTop: 7 }]}>Esqueci a senha</Text>
+                <Text style={[estilos.textoDestaque, { textDecorationLine: 'none', marginTop: 7 }]}>
+                    Esqueci a senha
+                </Text>
             </TouchableOpacity>
             <Botao
                 estilo={estilos.botao}
@@ -82,7 +83,6 @@ const Login = ({ navigation }) => {
                 action={{
                     label: 'Close'
                 }}
-                icon={'close'}
             >
                 {mensagemErro}
             </Snackbar>

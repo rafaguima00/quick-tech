@@ -1,15 +1,15 @@
 import { StyleSheet } from "react-native";
-import {tema} from '../../Tema'
+import { temaEscuro } from '../../Tema'
 
-const {fonteRegular} = tema;
+const { fonteRegular } = temaEscuro;
 
 const estilos = StyleSheet.create({
     container: {
         flex: 1
     },
     top: {
-        padding: 16, 
-        flexDirection: 'column', 
+        padding: 16,
+        flexDirection: 'column',
         alignItems: 'flex-start',
         marginLeft: 28,
         marginTop: 25,
