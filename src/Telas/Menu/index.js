@@ -1,17 +1,28 @@
 import { View, Text, SafeAreaView, TouchableOpacity, Image, ScrollView } from 'react-native'
-import estilos from './style';
+import { 
+    Topo, 
+    TextoTopo, 
+    ContentProd, 
+    News, 
+    Products, 
+    BotaoProduto, 
+    ImagemProduto, 
+    InfoProduto, 
+    Item, 
+    NomeProduto, 
+    Price } from './style';
 import { useContext } from 'react';
 import { GlobalContext } from '../../Context/GlobalContext';
 import { produtos } from '../../mocks/produtos';
 import { Feather } from 'react-native-vector-icons'
-import { temaEscuro, temaClaro } from '../../Tema';
+import { temaClaro } from '../../Tema';
 
 const Menu = ({ navigation }) => {
 
     const { dados } = useContext(GlobalContext)
     const { nome } = dados;
 
-    const { corDoTexto } = temaClaro
+    const { corDoTexto, bordaTopo } = temaClaro
 
     const options = [
         {
@@ -37,13 +48,13 @@ const Menu = ({ navigation }) => {
     ]
 
     return (
-        <SafeAreaView style={estilos.container}>
+        <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
-                <View style={estilos.top}>
+                <Topo style={{ borderBottomWidth: 2, borderBottomColor: bordaTopo }}>
                     <TouchableOpacity activeOpacity={0.4} onPress={() => navigation.openDrawer()}>
                         <Feather name="menu" size={27} color={corDoTexto} />
                     </TouchableOpacity>
-                    <Text style={estilos.textTop}>Olá, {nome ? nome : '[user_name]'}</Text>
+                    <TextoTopo>Olá, {nome ? nome : '[user_name]'}</TextoTopo>
                     <View style={{ flexDirection: 'row', gap: 15 }}>
                         {options.map(item => (
                             <TouchableOpacity activeOpacity={0.4} key={item.id} onPress={item.function}>
@@ -51,33 +62,31 @@ const Menu = ({ navigation }) => {
                             </TouchableOpacity>
                         ))}
                     </View>
-                </View>
-                
-                <View style={estilos.contentProducts}>
-                    <Text style={estilos.textTopRelease}>Novidades</Text>
-                    <View style={estilos.allProducts}>
+                </Topo>
+
+                <ContentProd>
+                    <News>Novidades</News>
+                    <Products>
                         {produtos.map(item => (
-                            <TouchableOpacity 
-                                key={item.id} 
-                                style={estilos.info} 
+                            <BotaoProduto
+                                key={item.id}
                                 activeOpacity={0.9}
                                 onPress={() => navigation.navigate('Informações')}
                             >
-                                <Image
-                                    style={estilos.image}
-                                    source={{ uri: item.image }}
-                                />
-                                <View style={estilos.infoProducts}>
-                                    <Text style={estilos.productName}>{item.name}</Text>
-                                    <View style={estilos.item}>
-                                        <Text style={estilos.price}>R$ {item.price}</Text>
-                                        <Feather name="star" size={14} color="#33bbc5" children={item.avaliacao} />
-                                    </View>
+                                <View style={{alignItems: 'center'}}>
+                                    <ImagemProduto source={{ uri: item.image }} />
                                 </View>
-                            </TouchableOpacity>
+                                <InfoProduto>
+                                    <NomeProduto>{item.name}</NomeProduto>
+                                    <Item>
+                                        <Price>R$ {item.price}</Price>
+                                        <Feather name="star" size={14} color="#33bbc5" children={item.avaliacao} />
+                                    </Item>
+                                </InfoProduto>
+                            </BotaoProduto>
                         ))}
-                    </View>
-                </View>
+                    </Products>
+                </ContentProd>
             </ScrollView>
         </SafeAreaView>
     )

@@ -1,37 +1,32 @@
-import { StyleSheet } from "react-native";
 import { temaEscuro } from "../../Tema";
+import styled from 'styled-components'
 
 const { fonteRegular } = temaEscuro;
 
-const estilos = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff'
-    },
-    form: {
-        marginTop: 28,
-        marginBottom: 20,
-        gap: 10,
-        width: '100%',
-        paddingHorizontal: 48
-    },
-    botao: {
-        marginTop: 22,
-        paddingVertical: 16,
-        width: '77%'
-    },
-    textoCadastro: {
-        fontFamily: fonteRegular,
-        fontSize: 14.5
-    },
-    textoDestaque: {
-        color: '#3968B4',
-        textDecorationLine: 'underline',
-        fontFamily: fonteRegular,
-        fontSize: 14.5
-    }
-})
+export const Container = styled.KeyboardAvoidingView`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+`
 
-export default estilos;
+export const Form = styled.View`
+    margin-top: 28px;
+    margin-bottom: 20px;
+    gap: 10px;
+    width: 100%;
+    padding: 0 48px;
+`
+
+export const TextoCadastro = styled.Text`
+    font-size: 15px;
+    font-family: ${fonteRegular};
+`
+
+export const TextoDestaque = styled.Text`
+    color: #3968B4;
+    text-decoration: underline;
+    text-decoration-color: #3968B4;
+    font-size: 15px;
+    font-family: ${fonteRegular};
+`

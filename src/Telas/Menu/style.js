@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { temaEscuro, temaClaro } from "../../Tema";
+import { styled } from "styled-components";
+import { temaClaro } from "../../Tema";
 
 const { 
     fonteNegrito, 
@@ -7,96 +7,84 @@ const {
     corDeFundoTopo, 
     corDoTexto, 
     corDaBorda, 
-    bordaTopo, 
-    corPrimaria, 
-    sombra } = temaClaro;
+    corPrimaria } = temaClaro;
 
-const estilos = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    top: {
-        backgroundColor: corDeFundoTopo,
-        height: 100,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 18,
-        borderBottomWidth: 2,
-        borderBottomColor: bordaTopo
-    },
-    textTop: {
-        fontFamily: fonteNegrito,
-        color: corDoTexto,
-        fontSize: 18,
-        width: 180,
-        maxHeight: 70
-    },
-    contentProducts: { 
-        paddingTop: 18,
-        backgroundColor: '#fff',
-        minHeight: '100%',
-        backgroundColor: corPrimaria
-    },
-    allProducts: { 
-        flexDirection: 'row', 
-        flexWrap: 'wrap', 
-        marginVertical: 16 
-    },
-    textTopRelease: {
-        fontFamily: fonteNegrito,
-        color: corDoTexto,
-        paddingLeft: 18,
-        fontSize: 24
-    },
-    info: {
-        backgroundColor: corBotao, 
-        width: 180, 
-        paddingVertical: 12,
-        borderRadius: 12,
-        borderWidth: 1.5,
-        borderColor: corDaBorda,
-        marginLeft: 17,
-        marginVertical:  9,
-        shadowColor: sombra,
-        shadowOpacity: 0.5,
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowRadius: 1
-    },
-    image: {
-        width: 130, 
-        height: 130,
-        borderRadius: 8,
-        marginBottom: 8,
-        marginLeft: 24,
-        justifyContent: 'center'
-    },
-    infoProducts: { 
-        marginHorizontal: 12, 
-        gap: 8, 
-        justifyContent: 'space-between', 
-        height: 75 
-    },    
-    productName: {
-        color: corDoTexto,
-        fontFamily: fonteNegrito,
-        maxHeight: 52,
-        textTransform: 'uppercase'
-    },
-    item: { 
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        gap: 15, 
-        justifyContent: 'space-between' 
-    },
-    price: {
-        color: '#33BBC5',
-        textDecorationLine: 'underline',
-        fontFamily: fonteNegrito
-    }
-})
+export const Topo = styled.View`
+    background-color: ${corDeFundoTopo};
+    height: 100px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+`
 
-export default estilos;
+export const TextoTopo = styled.Text`
+    font-family: ${fonteNegrito};
+    color: ${corDoTexto};
+    font-size: 18px;
+    width: 180px;
+    max-height: 70px;
+`
+
+export const ContentProd = styled.View`
+    padding-top: 18px;
+    min-height: 100%;
+    background-color: ${corPrimaria};
+`
+
+export const News = styled.Text`
+    font-family: ${fonteNegrito};
+    color: ${corDoTexto};
+    padding-left: 18px;
+    font-size: 24px;
+`
+
+export const Products = styled.View`
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 16px 0;
+`
+
+export const BotaoProduto = styled.TouchableOpacity`
+    background-color: ${corBotao};
+    width: 180px;
+    padding: 12px 0;
+    border-radius: 12px;
+    border: solid 1.5px ${corDaBorda};
+    margin: 9px 0 9px 17px;
+    box-shadow: 0 1px 1.5px #000;
+`
+
+export const ImagemProduto = styled.Image`
+    width: 130px;
+    height: 130px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+`
+
+export const InfoProduto = styled.View`
+    margin: 0 12px;
+    gap: 8px;
+    justify-content: space-between;
+    height: 75px;
+`
+
+export const NomeProduto = styled.Text`
+    color: ${corDoTexto};
+    font-family: ${fonteNegrito};
+    max-height: 52px;
+    text-transform: uppercase;
+`
+
+export const Item = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`
+
+export const Price = styled.Text`
+    color: #33bbc5;
+    text-decoration: underline;
+    text-decoration-color: #33bbc5;
+    font-family: ${fonteNegrito};
+`

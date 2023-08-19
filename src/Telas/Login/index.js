@@ -1,8 +1,8 @@
 import { Text, Image, KeyboardAvoidingView, Platform, View } from 'react-native'
 import { TextInput, Snackbar } from 'react-native-paper'
-import { Botao } from '../../Componentes/botao';
+import { Botao } from '../../Componentes/Botao/botao';
 import { temaEscuro } from '../../Tema';
-import estilos from './style';
+import estilos, { Container, Form, TextoCadastro, TextoDestaque } from './style';
 import { TouchableOpacity } from 'react-native';
 import { useState, useContext } from 'react'
 import { GlobalContext } from '../../Context/GlobalContext'
@@ -33,12 +33,11 @@ const Login = ({ navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView 
+        <Container
             behavior={Platform.OS === 'ios' ? 'height' : 'padding'}
-            style={estilos.container}
         >
             <Image source={require('../../../assets/logo.png')} />
-            <View style={estilos.form}>
+            <Form>
                 <TextInput
                     label='E-mail'
                     mode='outlined'
@@ -58,24 +57,23 @@ const Login = ({ navigation }) => {
                     secureTextEntry
                     activeOutlineColor={corPrimaria}
                 />
-            </View>
+            </Form>
             <View style={{ flexDirection: 'row', gap: 4 }}>
-                <Text style={estilos.textoCadastro}>Ainda não tem uma conta?</Text>
+                <TextoCadastro>Ainda não tem uma conta?</TextoCadastro>
                 <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-                    <Text style={estilos.textoDestaque}>Cadastre-se aqui</Text>
+                    <TextoDestaque>Cadastre-se aqui</TextoDestaque>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity>
-                <Text style={[estilos.textoDestaque, { textDecorationLine: 'none', marginTop: 7 }]}>
+                <TextoDestaque style={[{ textDecorationLine: 'none', marginVertical: 13 }]}>
                     Esqueci a senha
-                </Text>
+                </TextoDestaque>
             </TouchableOpacity>
             <Botao
-                estilo={estilos.botao}
                 children={'Login'}
                 negrito
-                corDeFundo={corPrimaria}
                 aoPressionar={validarLogin}
+                corDeFundo={corPrimaria}
             />
             <Snackbar
                 visible={snackVisible}
@@ -86,7 +84,7 @@ const Login = ({ navigation }) => {
             >
                 {mensagemErro}
             </Snackbar>
-        </KeyboardAvoidingView>
+        </Container>
     )
 }
 

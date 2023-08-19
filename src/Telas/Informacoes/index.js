@@ -1,11 +1,11 @@
 import { View, TouchableOpacity, SafeAreaView, Image, ScrollView } from 'react-native'
-import estilos from './style';
+import { ViewImage, Imagem } from './style';
 import { MaterialIcons } from 'react-native-vector-icons'
 import { produtos } from '../../mocks/produtos';
 import Quantidade from './componentes/quantidade';
 import InfoProduto from './componentes/informacoes';
 import Descricao from './componentes/descricao';
-import { Botao } from '../../Componentes/botao'
+import { Botao } from '../../Componentes/Botao/botao'
 import { temaEscuro } from '../../Tema';
 
 const { corPrimaria } = temaEscuro
@@ -13,7 +13,7 @@ const { corPrimaria } = temaEscuro
 const Informacoes = ({ navigation }) => {
 
     return (
-        <SafeAreaView style={estilos.container}>
+        <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
                 <TouchableOpacity
                     style={{ marginVertical: 18, marginLeft: 35 }}
@@ -21,24 +21,22 @@ const Informacoes = ({ navigation }) => {
                 >
                     <MaterialIcons name="arrow-back" size={32} />
                 </TouchableOpacity>
-                <View style={estilos.viewImage}>
-                    <Image source={{ uri: produtos[0].image }} style={estilos.productImage} />
-                </View>
+                <ViewImage>
+                    <Imagem source={{ uri: produtos[0].image }} />
+                </ViewImage>
                 <InfoProduto />
                 <Quantidade />
                 <Descricao />
-                <View style={{marginHorizontal: 36}}>
-                    <Botao 
+                <View style={{alignItems: 'center', gap: 20, paddingBottom: 12}}>
+                    <Botao
                         children={'Adicionar ao carrinho'}
                         corDeFundo={'#4285F4'}
                         negrito
-                        estilo={estilos.botao}
                     />
-                    <Botao 
+                    <Botao
                         children={'Finalizar compra'}
                         corDeFundo={corPrimaria}
                         negrito
-                        estilo={estilos.botao}
                     />
                 </View>
             </ScrollView>

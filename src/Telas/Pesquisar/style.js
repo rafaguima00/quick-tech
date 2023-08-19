@@ -1,41 +1,38 @@
-import { StyleSheet } from "react-native";
+import styled from 'styled-components'
 import { temaClaro } from '../../Tema'
 
 const { fonteNegrito } = temaClaro;
 
-const estilos = StyleSheet.create({
-    textInput: {
-        padding: 13,
-        marginHorizontal: 25,
-        marginVertical: 10,
-        borderWidth: 2,
-        borderColor: '#7d7d7d',
-        borderRadius: 10
-    },
-    itensFiltrados: {
-        backgroundColor: 'rgba(125,125,125,0.25)',
-        marginHorizontal: 28,
-        borderRadius: 10
-    },
-    items: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginHorizontal: 14,
-        borderBottomColor: '#3a3a3a',
-        borderBottomWidth: 1,
-        paddingVertical: 12,
-        gap: 10
-    },
-    image: {
-        width: 45,
-        height: 45,
-        marginLeft: 10
-    },
-    textItems: {
-        fontFamily: fonteNegrito,
-        maxWidth: 264,
-        color: '#3a3a3a'
-    }
-})
+export const TextoEscrito = styled.TextInput`
+    padding: 13px;
+    margin: 10px 25px;
+    border: 2px solid #7d7d7d;
+    border-radius: 10px;
+`
 
-export default estilos;
+export const ItensFiltrados = styled.View`
+    background-color: rgba(125,125,125,0.25);
+    margin: 0 28px;
+    border-radius: 10px;
+`
+
+export const Item = styled.TouchableOpacity`
+    flex-direction: row;
+    align-items: center;
+    margin: 0 14px;
+    padding: 12px 0;
+    gap: 10px;
+`
+
+export const Imagem = styled.Image`
+    width: 45px;
+    height: 45px;
+    margin-left: 10px;
+    border-radius: 5%;
+`
+
+export const TextoItem = styled.Text`
+    font-family: ${fonteNegrito};
+    color: #3a3a3a;
+    max-width: 264px;
+`

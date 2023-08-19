@@ -1,5 +1,5 @@
-import { View, TouchableOpacity, Text } from 'react-native'
-import estilos from '../style';
+import { View } from 'react-native'
+import { Quantity, TextoQuantidade, Incrementar, Diminuir, SinalMais, SinalMenos } from '../style';
 import { useState } from 'react';
 
 const Quantidade = () => {
@@ -13,28 +13,26 @@ const Quantidade = () => {
     }
 
     return (
-        <View style={estilos.quantidade}>
+        <Quantity>
             <View style={{ flexDirection: 'row' }}>
-                <Text style={estilos.textoQuantidade}>Quantidade: </Text>
-                <Text style={estilos.textoQuantidade}>{quantidade}</Text>
+                <TextoQuantidade>Quantidade: </TextoQuantidade>
+                <TextoQuantidade>{quantidade}</TextoQuantidade>
             </View>
             <View style={{ flexDirection: 'row', gap: 12 }}>
-                <TouchableOpacity
-                    style={estilos.botaoIncrementa}
+                <Incrementar
                     activeOpacity={0.6}
                     onPress={() => setQuantidade(quantidade + 1)}
                 >
-                    <Text style={estilos.sinalMais}>+</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={estilos.botaoDiminui}
+                    <SinalMais>+</SinalMais>
+                </Incrementar>
+                <Diminuir
                     activeOpacity={0.6}
-                    onPress={diminuirQuantidade}
+                    onPress={() => quantidade > 1 ? setQuantidade(quantidade - 1) - 1 : null}
                 >
-                    <Text style={estilos.sinalMenos}>-</Text>
-                </TouchableOpacity>
+                    <SinalMenos>-</SinalMenos>
+                </Diminuir>
             </View>
-        </View>
+        </Quantity>
     )
 }
 

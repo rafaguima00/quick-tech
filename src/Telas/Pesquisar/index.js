@@ -8,7 +8,7 @@ import {
     ScrollView,
     KeyboardAvoidingView
 } from "react-native";
-import estilos from "./style";
+import { Imagem, Item, ItensFiltrados, TextoEscrito, TextoItem } from "./style";
 import { useContext } from "react";
 import { produtos } from '../../mocks/produtos'
 import { MaterialIcons } from 'react-native-vector-icons'
@@ -30,31 +30,33 @@ const Pesquisa = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
                 <ScrollView>
                     <TouchableOpacity style={{ marginTop: 25, marginLeft: 25 }} onPress={() => navigation.goBack()}>
                         <MaterialIcons name="arrow-back" size={32} />
                     </TouchableOpacity>
-                    <TextInput
+                    <TextoEscrito
                         placeholder="Digite aqui para pesquisar"
-                        style={estilos.textInput}
                         value={pesquisar}
                         onChangeText={text => filtrarItens(text)}
                     />
-                    <View style={estilos.itensFiltrados}>
+                    <ItensFiltrados>
                         {itensFiltrados.map(item => (
-                            <TouchableOpacity 
-                                style={estilos.items} 
-                                key={item.id} 
+                            <Item
+                                style={{
+                                    borderBottomColor: '#7d7d7d',
+                                    borderBottomWidth: 1.5
+                                }}
+                                key={item.id}
                                 activeOpacity={0.4}
                                 onPress={() => navigation.navigate('Informações')}
                             >
-                                <Image source={{ uri: item.image }} style={estilos.image} />
-                                <Text style={estilos.textItems}>{item.name}</Text>
-                            </TouchableOpacity>
+                                <Imagem source={{ uri: item.image }} />
+                                <TextoItem>{item.name}</TextoItem>
+                            </Item>
                         ))}
-                    </View>
+                    </ItensFiltrados>
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>
