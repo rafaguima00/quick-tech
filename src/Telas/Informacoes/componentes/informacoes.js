@@ -1,14 +1,13 @@
 import { Feather } from 'react-native-vector-icons'
 import { InfoProduct, NameProduct, Price, PriceProduct } from '../style'
-import { produtos } from '../../../mocks/produtos'
 
-const InfoProduto = () => {
+const InfoProduto = ({ itemEscolhido }) => {
     return (
         <InfoProduct>
-            <NameProduct>{produtos[0].name}</NameProduct>
+            <NameProduct>{itemEscolhido.name}</NameProduct>
             <Price>
-                <PriceProduct>R$ {produtos[0].price}</PriceProduct>
-                <Feather name="star" size={18} color="#F5C03A" children={produtos[0].avaliacao} />
+                <PriceProduct>R$ {itemEscolhido.price}</PriceProduct>
+                <Feather name="star" size={18} color="#F5C03A" children={itemEscolhido.avaliacao} />
             </Price>
         </InfoProduct>
     )

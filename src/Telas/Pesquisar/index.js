@@ -1,23 +1,26 @@
 import {
-    TextInput,
+    Platform,
     SafeAreaView,
-    Text,
-    View,
-    Image,
     TouchableOpacity,
     ScrollView,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    Text
 } from "react-native";
 import { Imagem, Item, ItensFiltrados, TextoEscrito, TextoItem } from "./style";
 import { useContext } from "react";
 import { produtos } from '../../mocks/produtos'
 import { MaterialIcons } from 'react-native-vector-icons'
-import { Platform } from "react-native";
 import { PesquisaContext } from '../../Context/PesquisaContext'
 
 const Pesquisa = ({ navigation }) => {
 
-    const { pesquisar, setPesquisar, itensFiltrados, setItensFiltrados } = useContext(PesquisaContext)
+    const { 
+        pesquisar, 
+        setPesquisar, 
+        itensFiltrados,
+        setItensFiltrados,
+        setItemEscolhido
+    } = useContext(PesquisaContext)
 
     function filtrarItens(text) {
         if (text) {
@@ -27,6 +30,17 @@ const Pesquisa = ({ navigation }) => {
             setItensFiltrados(resultadoPesquisa)
         }
         setPesquisar(text)
+    }
+
+    function retornarDados({ item }) {
+        setItemEscolhido({
+            name: item.name,
+            image: item.image,
+            price: item.price,
+            avaliacao: item.avaliacao,
+            desc: item.descricao
+        })
+        navigation.navigate('Informações')
     }
 
     return (
@@ -50,7 +64,7 @@ const Pesquisa = ({ navigation }) => {
                                 }}
                                 key={item.id}
                                 activeOpacity={0.4}
-                                onPress={() => navigation.navigate('Informações')}
+                                onPress={() => retornarDados({item})}
                             >
                                 <Imagem source={{ uri: item.image }} />
                                 <TextoItem>{item.name}</TextoItem>

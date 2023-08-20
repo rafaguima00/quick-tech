@@ -1,12 +1,11 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { NameProduct, Desc } from '../style'
-import { produtos } from '../../../mocks/produtos'
 
-const Descricao = () => {
+const Descricao = ({ itemEscolhido }) => {
     return (
         <View style={{ marginHorizontal: 36, marginVertical: 20 }}>
             <NameProduct>Descrição</NameProduct>
-            <Desc>{produtos[3].descricao}</Desc>
+            <Desc>{itemEscolhido.desc}</Desc>
         </View>
     )
 }

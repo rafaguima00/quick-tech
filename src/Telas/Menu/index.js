@@ -16,11 +16,14 @@ import { GlobalContext } from '../../Context/GlobalContext';
 import { produtos } from '../../mocks/produtos';
 import { Feather } from 'react-native-vector-icons'
 import { temaClaro } from '../../Tema';
+import { PesquisaContext } from '../../Context/PesquisaContext';
 
 const Menu = ({ navigation }) => {
 
     const { dados } = useContext(GlobalContext)
     const { nome } = dados;
+
+    const { setItemEscolhido } = useContext(PesquisaContext)
 
     const { corDoTexto, bordaTopo } = temaClaro
 
@@ -47,6 +50,17 @@ const Menu = ({ navigation }) => {
         },
     ]
 
+    function retornarDados({ item }) {
+        setItemEscolhido({
+            name: item.name,
+            desc: item.descricao,
+            avaliacao: item.avaliacao,
+            price: item.price,
+            image: item.image
+        })
+        navigation.navigate('Informações')
+    }
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
@@ -71,7 +85,7 @@ const Menu = ({ navigation }) => {
                             <BotaoProduto
                                 key={item.id}
                                 activeOpacity={0.9}
-                                onPress={() => navigation.navigate('Informações')}
+                                onPress={() => retornarDados({ item })}
                             >
                                 <View style={{alignItems: 'center'}}>
                                     <ImagemProduto source={{ uri: item.image }} />

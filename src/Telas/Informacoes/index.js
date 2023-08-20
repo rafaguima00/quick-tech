@@ -1,14 +1,14 @@
 import { View, TouchableOpacity, SafeAreaView, ScrollView, Text } from 'react-native'
 import { ViewImage, Imagem } from './style';
-import { MaterialIcons } from 'react-native-vector-icons'
-import { produtos } from '../../mocks/produtos';
+import { MaterialIcons, Feather } from 'react-native-vector-icons'
 import Quantidade from './componentes/quantidade';
 import InfoProduto from './componentes/informacoes';
 import Descricao from './componentes/descricao';
 import { Botao } from '../../Componentes/Botao/botao'
 import { temaEscuro } from '../../Tema';
 import { Snackbar } from 'react-native-paper';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { PesquisaContext } from '../../Context/PesquisaContext';
 
 const { corPrimaria } = temaEscuro
 
@@ -16,22 +16,32 @@ const Informacoes = ({ navigation }) => {
 
     const [snackVisible, setSnackVisible] = useState(false)
 
+    const { itemEscolhido } = useContext(PesquisaContext)
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
-                <TouchableOpacity
-                    style={{ marginVertical: 18, marginLeft: 35 }}
-                    onPress={() => navigation.goBack()}
-                >
-                    <MaterialIcons name="arrow-back" size={32} />
-                </TouchableOpacity>
+                <View style={{ 
+                    flexDirection: 'row', 
+                    alignItems: 'center', 
+                    justifyContent: 'space-between',
+                    marginHorizontal: 35,
+                    marginVertical: 18
+                }}>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <MaterialIcons name="arrow-back" size={32} />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Feather name="heart" size={28} />
+                    </TouchableOpacity>
+                </View>
                 <ViewImage>
-                    <Imagem source={{ uri: produtos[0].image }} />
+                    <Imagem source={{ uri: itemEscolhido.image }} />
                 </ViewImage>
-                <InfoProduto />
+                <InfoProduto itemEscolhido={itemEscolhido} />
                 <Quantidade />
-                <Descricao />
-                <View style={{alignItems: 'center', gap: 20, paddingBottom: 12}}>
+                <Descricao itemEscolhido={itemEscolhido} />
+                <View style={{ alignItems: 'center', gap: 20, paddingBottom: 12 }}>
                     <Botao
                         children={'Adicionar ao carrinho'}
                         corDeFundo={'#4285F4'}
@@ -53,7 +63,7 @@ const Informacoes = ({ navigation }) => {
                     label: 'Close'
                 }}
             >
-                <Text style={{color: '#fff'}}>{produtos[0].name} adicionado ao carrinho!</Text>
+                <Text style={{ color: '#fff' }}>{itemEscolhido.name} adicionado ao carrinho!</Text>
             </Snackbar>
         </SafeAreaView>
     )

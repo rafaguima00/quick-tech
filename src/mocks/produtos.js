@@ -31,12 +31,4 @@ export const produtos = [
         image: 'https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/k/5/k512rgb-pt65.jpg',
         avaliacao: 4.8
     },
-    {
-        id: '5',
-        name: 'TECLADO GAMER REDRAGON SHIVA RGB',
-        descricao: 'O teclado mecânico sem fio CK721 é uma solução elegante de formato pequeno para trabalho e lazer. Um layout de 65% e tecnologia sem fio híbrida enfatiza a portabilidade com SO quase universal e compatibilidade de plataforma, enquanto um corpo de alumínio jateado imbui elegantemente a durabilidade necessária.',
-        price: 179.90,
-        image: 'https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/k/5/k512rgb-pt65.jpg',
-        avaliacao: 4.8
-    },
 ]

@@ -14,12 +14,6 @@ const CustomDrawer = () => {
 
     const botoes = [
         {
-            id: '1',
-            name: 'Menu',
-            function: () => { },
-            icon: 'menu'
-        },
-        {
             id: '2',
             name: 'Histórico',
             function: () => { },

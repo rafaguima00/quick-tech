@@ -16,7 +16,7 @@ const Endereco = () => {
         <Lista>
             <View style={{
                 flexDirection: 'row',
-                justifyContent: 'space-between', 
+                justifyContent: 'space-between',
                 alignItems: 'center',
                 borderBottomColor: '#3a3a3a',
                 borderBottomWidth: 1,
@@ -31,9 +31,9 @@ const Endereco = () => {
                 </TouchableOpacity>
             </View>
             <View style={{ gap: 6 }}>
-                <InfoEndereco>CEP: {cep ? cep : ''}</InfoEndereco>
+                <InfoEndereco>CEP: {cep}</InfoEndereco>
                 <InfoEndereco>{rua}, {numero} - {bairro} - {cidade} - {estado}</InfoEndereco>
-                <InfoEndereco>Complemento: {complemento ? complemento : 'Nenhum complemento'}</InfoEndereco>
+                <InfoEndereco>Complemento: {complemento}</InfoEndereco>
             </View>
         </Lista>
     )
