@@ -4,6 +4,7 @@ import StackNavigator from './src/Rotas/stackNavigator';
 import { useFonts, Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
 import { InfoProvider } from './src/Context/GlobalContext';
 import { PesquisaProvider } from './src/Context/PesquisaContext'
+import { CarrinhoProvider } from './src/Context/CarrinhoContext';
 
 export default function App() {
 
@@ -19,8 +20,10 @@ export default function App() {
   return (
     <InfoProvider>
       <PesquisaProvider>
-        <StatusBar style='auto' />
-        <StackNavigator />
+        <CarrinhoProvider>
+          <StatusBar style='auto' />
+          <StackNavigator />
+        </CarrinhoProvider>
       </PesquisaProvider>
     </InfoProvider>
   );

@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, SafeAreaView, Image, ScrollView } from 'react-native'
+import { View, TouchableOpacity, SafeAreaView, ScrollView, Text } from 'react-native'
 import { ViewImage, Imagem } from './style';
 import { MaterialIcons } from 'react-native-vector-icons'
 import { produtos } from '../../mocks/produtos';
@@ -7,10 +7,14 @@ import InfoProduto from './componentes/informacoes';
 import Descricao from './componentes/descricao';
 import { Botao } from '../../Componentes/Botao/botao'
 import { temaEscuro } from '../../Tema';
+import { Snackbar } from 'react-native-paper';
+import { useState } from 'react';
 
 const { corPrimaria } = temaEscuro
 
 const Informacoes = ({ navigation }) => {
+
+    const [snackVisible, setSnackVisible] = useState(false)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -32,14 +36,25 @@ const Informacoes = ({ navigation }) => {
                         children={'Adicionar ao carrinho'}
                         corDeFundo={'#4285F4'}
                         negrito
+                        aoPressionar={() => setSnackVisible(true)}
                     />
                     <Botao
                         children={'Finalizar compra'}
                         corDeFundo={corPrimaria}
                         negrito
+                        aoPressionar={() => navigation.navigate('Finalizar compra')}
                     />
                 </View>
             </ScrollView>
+            <Snackbar
+                visible={snackVisible}
+                onDismiss={() => setSnackVisible(false)}
+                action={{
+                    label: 'Close'
+                }}
+            >
+                <Text style={{color: '#fff'}}>{produtos[0].name} adicionado ao carrinho!</Text>
+            </Snackbar>
         </SafeAreaView>
     )
 }

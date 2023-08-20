@@ -1,4 +1,4 @@
-import { View, Text, KeyboardAvoidingView, ScrollView, SafeAreaView } from 'react-native'
+import { View, KeyboardAvoidingView, ScrollView, Platform } from 'react-native'
 import { TextInput, Snackbar } from 'react-native-paper'
 import { Container, Topo, TextoTopo, Form } from './style';
 import { useState, useContext } from 'react';

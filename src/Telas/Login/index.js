@@ -1,9 +1,8 @@
-import { Text, Image, KeyboardAvoidingView, Platform, View } from 'react-native'
+import { Image, Platform, View, TouchableOpacity } from 'react-native'
 import { TextInput, Snackbar } from 'react-native-paper'
 import { Botao } from '../../Componentes/Botao/botao';
 import { temaEscuro } from '../../Tema';
-import estilos, { Container, Form, TextoCadastro, TextoDestaque } from './style';
-import { TouchableOpacity } from 'react-native';
+import { Container, Form, TextoCadastro, TextoDestaque } from './style';
 import { useState, useContext } from 'react'
 import { GlobalContext } from '../../Context/GlobalContext'
 
@@ -65,7 +64,7 @@ const Login = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity>
-                <TextoDestaque style={[{ textDecorationLine: 'none', marginVertical: 13 }]}>
+                <TextoDestaque style={{ textDecorationLine: 'none', marginVertical: 13 }}>
                     Esqueci a senha
                 </TextoDestaque>
             </TouchableOpacity>

@@ -1,5 +1,5 @@
 import { TextInput, Snackbar } from "react-native-paper";
-import { Text, KeyboardAvoidingView, View, TouchableOpacity, ScrollView, Modal } from 'react-native'
+import { KeyboardAvoidingView, View, TouchableOpacity, ScrollView, Modal, Platform } from 'react-native'
 import { Container, Topo, TextoTopo, Form } from "./style";
 import { MaterialIcons } from 'react-native-vector-icons'
 import { useState, useContext } from "react";
@@ -39,7 +39,6 @@ const CadastroEndereco = ({ navigation }) => {
             setSnackVisible(true)
             setMensagemErro('Preencha os campos vazios')
         } else {
-            alert(JSON.stringify(dadosEndereco))
             navigation.replace('Menu')
         }
     }

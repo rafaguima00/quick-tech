@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { View, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native'
 import { 
     Topo, 
     TextoTopo, 
