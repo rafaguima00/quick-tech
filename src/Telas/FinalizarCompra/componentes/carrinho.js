@@ -12,7 +12,8 @@ import {
     TextoQuantidade,
     NomeProduto,
     PrecoProduto,
-    Lista
+    Lista, 
+    FirstRow
 } from '../style'
 import { produtosNoCarrinho } from '../../../mocks/produtosNoCarrinho'
 import { Feather } from 'react-native-vector-icons'
@@ -29,7 +30,12 @@ const Carrinho = () => {
                 <ConteudoCarrinho key={item.id}>
                     <ImagemProduto source={{ uri: item.image }} />
                     <Produto>
-                        <NomeProduto>{item.name}</NomeProduto>
+                        <FirstRow>
+                            <NomeProduto>{item.name}</NomeProduto>
+                            <TouchableOpacity activeOpacity={0.4}>
+                                <Feather name="trash-2" size={22} color={'#BB2525'} />
+                            </TouchableOpacity>
+                        </FirstRow>
                         <InformacoesProd>
                             <Options>
                                 <TextoQuantidade>{quantidade}</TextoQuantidade>
@@ -49,9 +55,6 @@ const Carrinho = () => {
                                         <SinalMenos>-</SinalMenos>
                                     </Diminuir>
                                 </View>
-                                <TouchableOpacity activeOpacity={0.4}>
-                                    <Feather name="trash-2" size={22} />
-                                </TouchableOpacity>
                             </Options>
                             <PrecoProduto>R$ {item.price}</PrecoProduto>
                         </InformacoesProd>

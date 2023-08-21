@@ -30,11 +30,13 @@ const Endereco = () => {
                     <Feather name="edit" size={24} color={'#3a3a3a'} />
                 </TouchableOpacity>
             </View>
-            <View style={{ gap: 6 }}>
-                <InfoEndereco>CEP: {cep}</InfoEndereco>
-                <InfoEndereco>{rua}, {numero} - {bairro} - {cidade} - {estado}</InfoEndereco>
-                <InfoEndereco>Complemento: {complemento}</InfoEndereco>
-            </View>
+            {dadosEndereco?.rua &&
+                <View style={{ gap: 6 }}>
+                    <InfoEndereco>CEP: {cep}</InfoEndereco>
+                    <InfoEndereco>{rua}, {numero ? numero : 's/n'} - {bairro} - {cidade} - {estado}</InfoEndereco>
+                    <InfoEndereco>Complemento: {complemento}</InfoEndereco>
+                </View>
+            }
         </Lista>
     )
 }

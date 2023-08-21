@@ -119,3 +119,9 @@ export const TextoTotal = styled.Text`
     color: ${corDoTexto};
     text-transform: uppercase;
 `
+
+export const FirstRow = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+`

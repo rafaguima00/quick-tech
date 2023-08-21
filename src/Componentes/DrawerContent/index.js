@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { GlobalContext } from '../../Context/GlobalContext'
 import { Botao, Lista, TextoBotao, TextoTopo, Topo, ViewImage } from './estilo'
 import { temaClaro } from '../../Tema'
+import { useNavigation } from '@react-navigation/native'
 
 const CustomDrawer = () => {
 
@@ -11,6 +12,8 @@ const CustomDrawer = () => {
     const { nome } = dados;
 
     const { corDoTexto } = temaClaro;
+
+    const navigation = useNavigation()
 
     const botoes = [
         {
@@ -22,13 +25,13 @@ const CustomDrawer = () => {
         {
             id: '3',
             name: 'Pagamento',
-            function: () => { },
+            function: () => { navigation.navigate('Cadastrar cartão') },
             icon: 'dollar-sign'
         },
         {
             id: '4',
             name: 'Endereço',
-            function: () => { },
+            function: () => { navigation.navigate('Endereço') },
             icon: 'home'
         },
         {
@@ -69,7 +72,7 @@ const CustomDrawer = () => {
             </Topo>
             <Lista>
                 {botoes.map(item => (
-                    <Botao key={item.id}>
+                    <Botao key={item.id} activeOpacity={0.4} onPress={item.function} >
                         <Feather name={item.icon} size={24} color={corDoTexto} />
                         <TextoBotao>{item.name}</TextoBotao>
                     </Botao>

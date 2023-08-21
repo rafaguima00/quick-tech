@@ -14,9 +14,9 @@ import { PesquisaContext } from '../../Context/PesquisaContext'
 
 const Pesquisa = ({ navigation }) => {
 
-    const { 
-        pesquisar, 
-        setPesquisar, 
+    const {
+        pesquisar,
+        setPesquisar,
         itensFiltrados,
         setItensFiltrados,
         setItemEscolhido
@@ -64,7 +64,7 @@ const Pesquisa = ({ navigation }) => {
                                 }}
                                 key={item.id}
                                 activeOpacity={0.4}
-                                onPress={() => retornarDados({item})}
+                                onPress={() => retornarDados({ item })}
                             >
                                 <Imagem source={{ uri: item.image }} />
                                 <TextoItem>{item.name}</TextoItem>
