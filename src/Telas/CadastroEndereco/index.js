@@ -7,6 +7,7 @@ import { temaEscuro } from "../../Tema";
 import { Botao } from '../../Componentes/Botao/botao'
 import ModalCarregando from "./Modal/modal";
 import { GlobalContext } from '../../Context/GlobalContext'
+import api from "../../Servicos/api";
 
 const CadastroEndereco = ({ navigation }) => {
 
@@ -18,7 +19,8 @@ const CadastroEndereco = ({ navigation }) => {
         complemento,
         estado,
         numero,
-        rua } = dadosEndereco;
+        rua 
+    } = dadosEndereco;
 
     const { corPrimaria } = temaEscuro
 
@@ -27,13 +29,31 @@ const CadastroEndereco = ({ navigation }) => {
     const [mensagemErro, setMensagemErro] = useState('')
     const [snackVisible, setSnackVisible] = useState(false)
 
+    async function buscarDados(cepDigitado) {
+        try {
+            const result = await api.get(`/${cepDigitado}/json/`)
+
+            if (result) {
+                setDadosEndereco({
+                    ...dadosEndereco,
+                    rua: result.data.logradouro,
+                    cidade: result.data.localidade,
+                    bairro: result.data.bairro,
+                    estado: result.data.uf
+                })
+            }
+        } catch {
+            setSnackVisible(true)
+            setMensagemErro('CEP inválido')
+        }
+    }
+
     function validarDados() {
         if (
             bairro == '' ||
             cep == '' ||
             cidade == '' ||
             estado == '' ||
-            numero == '' ||
             rua == '') {
             setErro(true)
             setSnackVisible(true)
@@ -64,6 +84,7 @@ const CadastroEndereco = ({ navigation }) => {
                             onChangeText={text => setDadosEndereco({ ...dadosEndereco, cep: text })}
                             activeOutlineColor={corPrimaria}
                             error={cep == '' ? erro : ''}
+                            onBlur={() => buscarDados(cep)}
                         />
                         <TextInput
                             label='Cidade'
@@ -108,7 +129,6 @@ const CadastroEndereco = ({ navigation }) => {
                             value={numero}
                             onChangeText={text => setDadosEndereco({ ...dadosEndereco, numero: text })}
                             activeOutlineColor={corPrimaria}
-                            error={numero == '' ? erro : ''}
                         />
 
                         <TextInput
@@ -119,7 +139,7 @@ const CadastroEndereco = ({ navigation }) => {
                             activeOutlineColor={corPrimaria}
                         />
                     </Form>
-                    <View style={{alignItems: 'center', paddingBottom: 12}}>
+                    <View style={{ alignItems: 'center', paddingBottom: 12 }}>
                         <Botao
                             children={'Próximo'}
                             corDeFundo={corPrimaria}
