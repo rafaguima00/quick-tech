@@ -66,7 +66,7 @@ const CadastroEndereco = ({ navigation }) => {
     return (
         <Container>
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'height' : 'padding'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
                 <ScrollView>
                     <Topo>
