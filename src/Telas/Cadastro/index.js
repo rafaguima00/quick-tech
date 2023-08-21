@@ -7,6 +7,7 @@ import { temaEscuro } from '../../Tema';
 import { MaterialIcons } from 'react-native-vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GlobalContext } from '../../Context/GlobalContext'
+import { cpf as cpfUser } from 'cpf-cnpj-validator'; 
 
 const { corPrimaria } = temaEscuro;
 
@@ -18,6 +19,8 @@ const Cadastro = ({ navigation }) => {
     const [erro, setErro] = useState(false)
     const [mensagemErro, setMensagemErro] = useState('')
     const [snackVisible, setSnackVisible] = useState(false)
+
+    const cpfInvalido = (cpfUser.isValid(cpf))
 
     const validarCadastro = () => {
         if (email == '' || senha == '' || confirmaSenha == '' || nome == '' || cpf == '' || cel == '') {
@@ -32,6 +35,11 @@ const Cadastro = ({ navigation }) => {
             setErro(true)
             setSnackVisible(true)
             setMensagemErro('A senha deve conter 6 ou mais caracteres')
+        } 
+        else if (cpfInvalido == false) {
+            setErro(true)
+            setSnackVisible(true)
+            setMensagemErro('CPF inválido')
         }
         else {
             navigation.navigate('Endereço')
@@ -82,7 +90,7 @@ const Cadastro = ({ navigation }) => {
                             keyboardType='number-pad'
                             value={cpf}
                             onChangeText={text => setDados({ ...dados, cpf: text })}
-                            error={cpf == '' ? erro : ''}
+                            error={cpfInvalido == false ? erro : ''}
                             activeOutlineColor={corPrimaria}
                         />
                         <TextInput
@@ -110,7 +118,9 @@ const Cadastro = ({ navigation }) => {
                         <Botao
                             children='Próximo'
                             corDeFundo={corPrimaria}
-                            aoPressionar={validarCadastro}
+                            aoPressionar={() =>{ 
+                                validarCadastro()
+                            }}
                             negrito
                         />
                     </View>
