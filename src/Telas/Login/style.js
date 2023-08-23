@@ -3,10 +3,9 @@ import styled from 'styled-components'
 
 const { fonteRegular } = temaEscuro;
 
-export const Container = styled.KeyboardAvoidingView`
+export const Container = styled.SafeAreaView`
     flex: 1;
     justify-content: center;
-    align-items: center;
     background-color: #fff;
 `
 

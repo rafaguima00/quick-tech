@@ -19,7 +19,7 @@ const CadastroEndereco = ({ navigation }) => {
         complemento,
         estado,
         numero,
-        rua 
+        rua
     } = dadosEndereco;
 
     const { corPrimaria } = temaEscuro
@@ -139,7 +139,7 @@ const CadastroEndereco = ({ navigation }) => {
                             activeOutlineColor={corPrimaria}
                         />
                     </Form>
-                    <View style={{ alignItems: 'center', paddingBottom: 12 }}>
+                    <View style={{ alignItems: 'center', paddingBottom: 12, marginHorizontal: 48 }}>
                         <Botao
                             children={'Próximo'}
                             corDeFundo={corPrimaria}

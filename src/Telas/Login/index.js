@@ -1,4 +1,4 @@
-import { Image, Platform, View, TouchableOpacity } from 'react-native'
+import { Image, Platform, View, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { TextInput, Snackbar } from 'react-native-paper'
 import { Botao } from '../../Componentes/Botao/botao';
 import { temaEscuro } from '../../Tema';
@@ -32,48 +32,56 @@ const Login = ({ navigation }) => {
     }
 
     return (
-        <Container
-            behavior={Platform.OS === 'ios' ? 'height' : 'padding'}
-        >
-            <Image source={require('../../../assets/logo.png')} />
-            <Form>
-                <TextInput
-                    label='E-mail'
-                    mode='outlined'
-                    autoCapitalize='none'
-                    value={email}
-                    onChangeText={text => setDados({ ...dados, email: text })}
-                    error={email == '' ? erro : ''}
-                    activeOutlineColor={corPrimaria}
-                />
-                <TextInput
-                    label='Senha'
-                    mode='outlined'
-                    autoCapitalize='none'
-                    value={senha}
-                    onChangeText={text => setDados({ ...dados, senha: text })}
-                    error={senha == '' ? erro : ''}
-                    secureTextEntry
-                    activeOutlineColor={corPrimaria}
-                />
-            </Form>
-            <View style={{ flexDirection: 'row', gap: 4 }}>
-                <TextoCadastro>Ainda não tem uma conta?</TextoCadastro>
-                <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-                    <TextoDestaque>Cadastre-se aqui</TextoDestaque>
-                </TouchableOpacity>
-            </View>
-            <TouchableOpacity>
-                <TextoDestaque style={{ textDecorationLine: 'none', marginVertical: 13 }}>
-                    Esqueci a senha
-                </TextoDestaque>
-            </TouchableOpacity>
-            <Botao
-                children={'Login'}
-                negrito
-                aoPressionar={validarLogin}
-                corDeFundo={corPrimaria}
-            />
+        <Container>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'height' : 'padding'}
+            >
+                <ScrollView>
+                    <View style={{ alignItems: 'center' }}>
+                        <Image source={require('../../../assets/logo.png')} />
+                    </View>
+                    <Form>
+                        <TextInput
+                            label='E-mail'
+                            mode='outlined'
+                            autoCapitalize='none'
+                            value={email}
+                            onChangeText={text => setDados({ ...dados, email: text })}
+                            error={email == '' ? erro : ''}
+                            activeOutlineColor={corPrimaria}
+                        />
+                        <TextInput
+                            label='Senha'
+                            mode='outlined'
+                            autoCapitalize='none'
+                            value={senha}
+                            onChangeText={text => setDados({ ...dados, senha: text })}
+                            error={senha == '' ? erro : ''}
+                            secureTextEntry
+                            activeOutlineColor={corPrimaria}
+                        />
+                    </Form>
+                    <View style={{ flexDirection: 'row', gap: 4, justifyContent: 'center' }}>
+                        <TextoCadastro>Ainda não tem uma conta?</TextoCadastro>
+                        <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+                            <TextoDestaque>Cadastre-se aqui</TextoDestaque>
+                        </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity style={{ alignItems: 'center' }}>
+                        <TextoDestaque style={{ textDecorationLine: 'none', marginVertical: 13 }}>
+                            Esqueci a senha
+                        </TextoDestaque>
+                    </TouchableOpacity>
+                    <View style={{ alignItems: 'center', paddingBottom: 12, marginHorizontal: 48 }}>
+                        <Botao
+                            children='Login'
+                            corDeFundo={corPrimaria}
+                            aoPressionar={validarLogin}
+                            negrito
+                        />
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
             <Snackbar
                 visible={snackVisible}
                 onDismiss={() => setSnackVisible(false)}

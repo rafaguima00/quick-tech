@@ -11,7 +11,7 @@ const Quantidade = () => {
         <Quantity>
             <View style={{ flexDirection: 'row' }}>
                 <TextoQuantidade>Quantidade: </TextoQuantidade>
-                <TextoQuantidade>{ quantidade ? quantidade : 0 }</TextoQuantidade>
+                <TextoQuantidade>{ quantidade }</TextoQuantidade>
             </View>
             <View style={{ flexDirection: 'row', gap: 12 }}>
                 <Incrementar
@@ -22,7 +22,7 @@ const Quantidade = () => {
                 </Incrementar>
                 <Diminuir
                     activeOpacity={0.6}
-                    onPress={() => quantidade > 1 ? setQuantidade(quantidade - 1) : null}
+                    onPress={() => quantidade > 0 ? setQuantidade(quantidade - 1) : null}
                 >
                     <SinalMenos>-</SinalMenos>
                 </Diminuir>

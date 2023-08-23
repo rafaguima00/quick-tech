@@ -35,13 +35,11 @@ const Cadastro = ({ navigation }) => {
             setErro(true)
             setSnackVisible(true)
             setMensagemErro('A senha deve conter 6 ou mais caracteres')
-        } 
-        else if (cpfInvalido == false) {
+        } else if (cpfInvalido == false) {
             setErro(true)
             setSnackVisible(true)
             setMensagemErro('CPF inválido')
-        }
-        else {
+        } else {
             navigation.navigate('Endereço')
         }
     }
@@ -114,13 +112,11 @@ const Cadastro = ({ navigation }) => {
                             secureTextEntry
                         />
                     </Form>
-                    <View style={{ alignItems: 'center', paddingBottom: 12 }}>
+                    <View style={{ alignItems: 'center', paddingBottom: 12, marginHorizontal: 48 }}>
                         <Botao
                             children='Próximo'
                             corDeFundo={corPrimaria}
-                            aoPressionar={() =>{ 
-                                validarCadastro()
-                            }}
+                            aoPressionar={validarCadastro}
                             negrito
                         />
                     </View>
