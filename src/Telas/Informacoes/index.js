@@ -9,6 +9,7 @@ import { temaEscuro } from '../../Tema';
 import { Snackbar } from 'react-native-paper';
 import { useState, useContext } from 'react';
 import { PesquisaContext } from '../../Context/PesquisaContext';
+import { CarrinhoContext } from '../../Context/CarrinhoContext';
 
 const { corPrimaria } = temaEscuro
 
@@ -17,13 +18,14 @@ const Informacoes = ({ navigation }) => {
     const [snackVisible, setSnackVisible] = useState(false)
 
     const { itemEscolhido } = useContext(PesquisaContext)
+    const { adicionarAoCarrinho } = useContext(CarrinhoContext)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
-                <View style={{ 
-                    flexDirection: 'row', 
-                    alignItems: 'center', 
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
                     justifyContent: 'space-between',
                     marginHorizontal: 35,
                     marginVertical: 18
@@ -41,12 +43,15 @@ const Informacoes = ({ navigation }) => {
                 <InfoProduto itemEscolhido={itemEscolhido} />
                 <Quantidade />
                 <Descricao itemEscolhido={itemEscolhido} />
-                <View style={{ alignItems: 'center', gap: 20, paddingBottom: 12 }}>
+                <View style={{ alignItems: 'center', gap: 20, marginBottom: 36, marginHorizontal: 36 }}>
                     <Botao
                         children={'Adicionar ao carrinho'}
                         corDeFundo={'#4285F4'}
                         negrito
-                        aoPressionar={() => setSnackVisible(true)}
+                        aoPressionar={() => {
+                            adicionarAoCarrinho(itemEscolhido)
+                            setSnackVisible(true)
+                        }}
                     />
                     <Botao
                         children={'Finalizar compra'}

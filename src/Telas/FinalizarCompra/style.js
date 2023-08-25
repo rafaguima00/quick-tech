@@ -45,8 +45,9 @@ export const Lista = styled.View`
 
 export const ConteudoCarrinho = styled.View`
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
+    margin-bottom: 16px;
 `
 
 export const ImagemProduto = styled.Image`
@@ -91,6 +92,19 @@ export const PrecoProduto = styled.Text`
     font-family: ${fonteNegrito};
     font-size: 14.5px;
     color: ${corDoTexto};
+`
+
+export const TextoCarrinho = styled.Text`
+    font-family: ${fonteNegrito};
+    color: ${corDoTexto};
+    font-size: 21px;
+    padding-bottom: 14px;
+`
+
+export const TextoCarrinhoVazio = styled.Text`
+    font-family: ${fonteRegular};
+    font-size: 16px;
+    color: #7d7d7d;
 `
 
 export const EnderecoEntrega = styled.Text`

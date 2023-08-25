@@ -7,7 +7,9 @@ const {
     corDeFundoTopo, 
     corDoTexto, 
     corDaBorda, 
-    corPrimaria } = temaClaro;
+    corPrimaria,
+    fonteRegular 
+} = temaClaro;
 
 export const Topo = styled.View`
     background-color: ${corDeFundoTopo};
@@ -30,6 +32,12 @@ export const ContentProd = styled.View`
     padding-top: 18px;
     min-height: 100%;
     background-color: ${corPrimaria};
+`
+
+export const UltimosVistos = styled.FlatList`
+    flex-direction: row;
+    margin: 16px 0;
+    background-color: ${corBotao};
 `
 
 export const News = styled.Text`
