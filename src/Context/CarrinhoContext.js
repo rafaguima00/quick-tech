@@ -7,12 +7,25 @@ export function CarrinhoProvider({ children }) {
 
     const [cartItem, setCartItem] = useState([])
 
-    const adicionarAoCarrinho = (produto) => setCartItem([...cartItem, produto])
+    const addItemToCart = (produto) => {
+        const itemExistente = cartItem.find(item => item.id == produto.id)
+
+        if (itemExistente) {
+            const updatedCart = cartItem.map((item) =>
+                item.id == itemExistente.id ? 
+                { ...item, quantidade: item.quantidade + produto.quantidade } : 
+                item
+            );
+            setCartItem(updatedCart);
+        } else {
+            setCartItem([...cartItem, { ...produto }]);
+        }
+    }
 
     const value = {
         cartItem,
         setCartItem,
-        adicionarAoCarrinho
+        addItemToCart
     }
 
     return (

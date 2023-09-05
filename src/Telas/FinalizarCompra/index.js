@@ -1,4 +1,4 @@
-import { SafeAreaView, View, ScrollView, TouchableOpacity } from 'react-native'
+import { SafeAreaView, View, TouchableOpacity } from 'react-native'
 import { MaterialIcons } from 'react-native-vector-icons'
 import Carrinho from './componentes/carrinho'
 import Endereco from './componentes/endereco'
@@ -19,8 +19,6 @@ const FinalizarCompra = ({ navigation }) => {
         const itemPrice = item.desconto ? (item.price * item.desconto) : item.price;
         return (itemPrice * item.quantidade) + acc;
     }, 0)
-
-    console.log(cartItem)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

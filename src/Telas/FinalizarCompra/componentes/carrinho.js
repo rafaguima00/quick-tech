@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, Alert } from 'react-native'
 import {
     Diminuir,
     Incrementar,
@@ -32,6 +32,26 @@ const Carrinho = () => {
         setCartItem(updatedItems)
     }
 
+    const handleIncrementItem = (itemId) => {
+        const updatedCart = cartItem.map(item => {
+            if (item.id == itemId) {
+                return {...item, quantidade: item.quantidade + 1}
+            }
+            return item;
+        })
+        setCartItem(updatedCart)
+    }
+
+    const handleDecrementItem = (itemId) => {
+        const updatedCart = cartItem.map(item => {
+            if(item.quantidade > 1 && item.id == itemId) {
+                return {...item, quantidade: item.quantidade - 1}
+            }
+            return item;
+        })
+        setCartItem(updatedCart)
+    }
+
     const renderItem = ({ item }) => {
         return (
             <ConteudoCarrinho key={item.id}>
@@ -41,7 +61,21 @@ const Carrinho = () => {
                         <NomeProduto>{item.name}</NomeProduto>
                         <TouchableOpacity 
                             activeOpacity={0.4} 
-                            onPress={() => handleRemoveItem( item.id )}
+                            onPress={() => {
+                                Alert.alert(
+                                    "Remover item",
+                                    `Tem certeza que deseja remover o item ${item.name} ?`,
+                                    [
+                                        {
+                                            text: 'OK',
+                                            onPress: () => handleRemoveItem(item.id)
+                                        },
+                                        {
+                                            text: 'Cancelar'
+                                        }
+                                    ]
+                                )
+                            }}
                         >
                             <Feather name="trash-2" size={22} color={'#BB2525'} />
                         </TouchableOpacity>
@@ -50,20 +84,18 @@ const Carrinho = () => {
                         <Options>
                             <TextoQuantidade>{item.quantidade}</TextoQuantidade>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                                <Incrementar
-                                    activeOpacity={0.6}
-                                    onPress={() => {
-                                        item.quantidade > 1 && setCartItem({...cartItem, quantidade: item.quantidade - 1})
-                                    }}
-                                >
-                                    <SinalMais>-</SinalMais>
-                                </Incrementar>
                                 <Diminuir
                                     activeOpacity={0.6}
-                                    onPress={() => setCartItem({...cartItem, quantidade: item.quantidade + 1})}
+                                    onPress={() => handleDecrementItem(item.id)}
                                 >
-                                    <SinalMenos>+</SinalMenos>
+                                    <SinalMenos>-</SinalMenos>
                                 </Diminuir>
+                                <Incrementar
+                                    activeOpacity={0.6}
+                                    onPress={() => handleIncrementItem(item.id)}
+                                >
+                                    <SinalMais>+</SinalMais>
+                                </Incrementar>
                             </View>
                         </Options>
                         <PrecoProduto>

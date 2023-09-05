@@ -93,7 +93,5 @@ export const Item = styled.View`
 
 export const Price = styled.Text`
     color: #33bbc5;
-    text-decoration: underline;
-    text-decoration-color: #33bbc5;
     font-family: ${fonteNegrito};
 `

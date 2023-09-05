@@ -18,8 +18,8 @@ const Informacoes = ({ navigation }) => {
     const [snackVisible, setSnackVisible] = useState(false)
 
     const { itemEscolhido } = useContext(PesquisaContext)
-    const { adicionarAoCarrinho } = useContext(CarrinhoContext)
-
+    const { addItemToCart } = useContext(CarrinhoContext)
+    
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
@@ -49,7 +49,7 @@ const Informacoes = ({ navigation }) => {
                         corDeFundo={'#4285F4'}
                         negrito
                         aoPressionar={() => {
-                            adicionarAoCarrinho(itemEscolhido)
+                            addItemToCart(itemEscolhido)
                             setSnackVisible(true)
                         }}
                     />
