@@ -15,8 +15,6 @@ import { Icon } from "react-native-vector-icons/Feather"
 
 const UltimoVisto = ({ retornarDados }) => {
 
-    const { ultimosVistos } = useContext(CarrinhoContext)
-
     const renderItem = ({ item }) => {
         return (
             <BotaoProduto
@@ -40,16 +38,14 @@ const UltimoVisto = ({ retornarDados }) => {
 
     return (
         <View>
-            {ultimosVistos[0] &&
-                <UltimosVistos
-                    style={{ maxHeight: 250 }}
-                    showsVerticalScrollIndicator={false}
-                    data={ultimosVistos}
-                    key={item => item.id}
-                    renderItem={renderItem}
-                    ListHeaderComponent={() => <News>Últimos vistos</News>}
-                />
-            }
+            {/* <UltimosVistos
+                style={{ maxHeight: 250 }}
+                showsVerticalScrollIndicator={false}
+                data={{}}
+                key={item => item.id}
+                renderItem={renderItem}
+                ListHeaderComponent={() => <News>Últimos vistos</News>}
+            /> */}
         </View>
     )
 }

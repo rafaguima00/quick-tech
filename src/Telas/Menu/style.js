@@ -50,7 +50,7 @@ export const News = styled.Text`
 export const Products = styled.View`
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 16px 0;
+    margin: 8px 0;
 `
 
 export const BotaoProduto = styled.TouchableOpacity`
@@ -67,6 +67,7 @@ export const ImagemProduto = styled.Image`
     width: 130px;
     height: 130px;
     border-radius: 8px;
+    border: solid 2px ${corDoTexto};
     margin-bottom: 8px;
 `
 
@@ -74,20 +75,20 @@ export const InfoProduto = styled.View`
     margin: 0 12px;
     gap: 8px;
     justify-content: space-between;
-    height: 75px;
+    height: 90px;
+    box-sizing: border-box;
 `
 
 export const NomeProduto = styled.Text`
     color: ${corDoTexto};
     font-family: ${fonteNegrito};
     max-height: 52px;
-    text-transform: uppercase;
 `
 
 export const Item = styled.View`
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 `
 
 export const Price = styled.Text`

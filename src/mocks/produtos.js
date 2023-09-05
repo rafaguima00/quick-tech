@@ -6,7 +6,8 @@ export const produtos = [
         price: 1999.99,
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ73lhGJZK35yLwSZncZzsLvojOUN6Fm6jVsiSnYIrKYyFikckzBnBz6s26mkF0XC7hJbE&usqp=CAU',
         avaliacao: 5,
-        desconto: 0.8
+        desconto: 0.8,
+        quantidade: 1
     },
     {
         id: '2',
@@ -15,7 +16,8 @@ export const produtos = [
         price: 139.99,
         image: 'https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/t/g/tgt-dvr-rgb011211.jpg',
         avaliacao: 4.5,
-        desconto: 0.75
+        desconto: 0.75,
+        quantidade: 1
     },
     {
         id: '3',
@@ -24,7 +26,8 @@ export const produtos = [
         price: 1929.99,
         image: 'https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/a/p/apus-preto-amd-sgpu-001_1_3.jpg',
         avaliacao: 4.8,
-        desconto: 0
+        desconto: 0,
+        quantidade: 1
     },
     {
         id: '4',
@@ -33,6 +36,7 @@ export const produtos = [
         price: 179.99,
         image: 'https://media.pichau.com.br/media/catalog/product/cache/2f958555330323e505eba7ce930bdf27/k/5/k512rgb-pt65.jpg',
         avaliacao: 4.8,
-        desconto: 0.8
+        desconto: 0.8,
+        quantidade: 1
     },
 ]

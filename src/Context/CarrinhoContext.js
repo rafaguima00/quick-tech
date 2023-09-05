@@ -1,45 +1,22 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
+import { PesquisaContext } from "./PesquisaContext";
 
 export const CarrinhoContext = createContext({})
 
 export function CarrinhoProvider({ children }) {
 
-    const [quantidade, setQuantidade] = useState(0)
-    const [carrinho, setCarrinho] = useState([])
-    const [quantidadeVisto, setQuantidadeVisto] = useState(1)
-    const [ultimosVistos, setUltimosVistos] = useState([])
+    const [cartItem, setCartItem] = useState([])
 
-    function produtoVisto(produto) {
-        //setQuantidadeVisto(quantidadeVisto + 1)
+    const adicionarAoCarrinho = (produto) => setCartItem([...cartItem, produto])
 
-        let novoUltimosVistos = new Set(ultimosVistos)
-        novoUltimosVistos.add(produto)
-        setUltimosVistos(novoUltimosVistos)
-    }
-
-    function adicionarAoCarrinho(produto) {
-        if (quantidade == 0) {
-            setQuantidade(quantidade + 1)
-        }
-
-        let novoCarrinho = carrinho
-        novoCarrinho.push(produto)
-        setCarrinho(novoCarrinho)
+    const value = {
+        cartItem,
+        setCartItem,
+        adicionarAoCarrinho
     }
 
     return (
-        <CarrinhoContext.Provider
-            value={{
-                quantidade, 
-                setQuantidade,
-                carrinho,
-                setCarrinho,
-                ultimosVistos,
-                setUltimosVistos,
-                produtoVisto,
-                adicionarAoCarrinho
-            }}
-        >
+        <CarrinhoContext.Provider value={value}>
             {children}
         </CarrinhoContext.Provider>
     )

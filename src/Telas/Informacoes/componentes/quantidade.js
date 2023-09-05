@@ -1,30 +1,31 @@
 import { View } from 'react-native'
 import { Quantity, TextoQuantidade, Incrementar, Diminuir, SinalMais, SinalMenos } from '../style';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CarrinhoContext } from '../../../Context/CarrinhoContext';
+import { PesquisaContext } from '../../../Context/PesquisaContext';
 
 const Quantidade = () => {
 
-    const { quantidade, setQuantidade } = useContext(CarrinhoContext)
+    const { itemEscolhido, setItemEscolhido } = useContext(PesquisaContext)
 
     return (
         <Quantity>
             <View style={{ flexDirection: 'row' }}>
                 <TextoQuantidade>Quantidade: </TextoQuantidade>
-                <TextoQuantidade>{ quantidade }</TextoQuantidade>
+                <TextoQuantidade>{itemEscolhido.quantidade}</TextoQuantidade>
             </View>
             <View style={{ flexDirection: 'row', gap: 12 }}>
                 <Incrementar
                     activeOpacity={0.6}
-                    onPress={() => setQuantidade(quantidade + 1)}
+                    onPress={() => itemEscolhido.quantidade > 1 && setItemEscolhido({...itemEscolhido, quantidade: itemEscolhido.quantidade - 1})}
                 >
-                    <SinalMais>+</SinalMais>
+                    <SinalMais>-</SinalMais>
                 </Incrementar>
                 <Diminuir
                     activeOpacity={0.6}
-                    onPress={() => quantidade > 0 ? setQuantidade(quantidade - 1) : null}
+                    onPress={() => setItemEscolhido({...itemEscolhido, quantidade: itemEscolhido.quantidade + 1 })}
                 >
-                    <SinalMenos>-</SinalMenos>
+                    <SinalMenos>+</SinalMenos>
                 </Diminuir>
             </View>
         </Quantity>

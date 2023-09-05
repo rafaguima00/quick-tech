@@ -21,10 +21,16 @@ import { Feather } from 'react-native-vector-icons'
 import { useContext } from 'react'
 import { CarrinhoContext } from '../../../Context/CarrinhoContext'
 import { FlatList } from 'react-native'
+import formatCurrency from '../../../Utils/formatCurrency'
 
 const Carrinho = () => {
 
-    const { quantidade, setQuantidade, carrinho } = useContext(CarrinhoContext)
+    const { cartItem, setCartItem } = useContext(CarrinhoContext)
+
+    const handleRemoveItem = ( itemSelecionado ) => {
+        const updatedItems = cartItem.filter(item => item.id != itemSelecionado)
+        setCartItem(updatedItems)
+    }
 
     const renderItem = ({ item }) => {
         return (
@@ -33,31 +39,40 @@ const Carrinho = () => {
                 <Produto>
                     <FirstRow>
                         <NomeProduto>{item.name}</NomeProduto>
-                        <TouchableOpacity activeOpacity={0.4}>
+                        <TouchableOpacity 
+                            activeOpacity={0.4} 
+                            onPress={() => handleRemoveItem( item.id )}
+                        >
                             <Feather name="trash-2" size={22} color={'#BB2525'} />
                         </TouchableOpacity>
                     </FirstRow>
                     <InformacoesProd>
                         <Options>
-                            <TextoQuantidade>{quantidade}</TextoQuantidade>
+                            <TextoQuantidade>{item.quantidade}</TextoQuantidade>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
                                 <Incrementar
                                     activeOpacity={0.6}
-                                    onPress={() => setQuantidade(quantidade + 1)}
+                                    onPress={() => {
+                                        item.quantidade > 1 && setCartItem({...cartItem, quantidade: item.quantidade - 1})
+                                    }}
                                 >
-                                    <SinalMais>+</SinalMais>
+                                    <SinalMais>-</SinalMais>
                                 </Incrementar>
                                 <Diminuir
                                     activeOpacity={0.6}
-                                    onPress={() => {
-                                        quantidade > 1 ? setQuantidade(quantidade - 1) : null
-                                    }}
+                                    onPress={() => setCartItem({...cartItem, quantidade: item.quantidade + 1})}
                                 >
-                                    <SinalMenos>-</SinalMenos>
+                                    <SinalMenos>+</SinalMenos>
                                 </Diminuir>
                             </View>
                         </Options>
-                        <PrecoProduto>R$ {item.price}</PrecoProduto>
+                        <PrecoProduto>
+                            {
+                                item.desconto != 0 ?
+                                formatCurrency((item.price * item.desconto) * item.quantidade, 'BRL') :
+                                formatCurrency(item.price * item.quantidade, 'BRL')
+                            }
+                        </PrecoProduto>
                     </InformacoesProd>
                 </Produto>
             </ConteudoCarrinho>
@@ -69,7 +84,7 @@ const Carrinho = () => {
             <FlatList
                 style={{ maxHeight: 250 }}
                 showsVerticalScrollIndicator={false}
-                data={carrinho}
+                data={cartItem}
                 key={item => item.id}
                 renderItem={renderItem}
                 ListHeaderComponent={() => <TextoCarrinho>Carrinho</TextoCarrinho>}

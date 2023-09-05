@@ -5,13 +5,22 @@ import Endereco from './componentes/endereco'
 import { Total, TextoTotal } from './style'
 import { temaClaro } from '../../Tema'
 import { Botao } from '../../Componentes/Botao/botao'
-import { useContext, useEffect } from 'react'
-import { PesquisaContext } from '../../Context/PesquisaContext'
+import { useContext } from 'react'
+import formatCurrency from '../../Utils/formatCurrency'
 import { CarrinhoContext } from '../../Context/CarrinhoContext'
 
 const { corDoTexto } = temaClaro
 
 const FinalizarCompra = ({ navigation }) => {
+
+    const { cartItem } = useContext(CarrinhoContext)
+
+    const totalPrice = cartItem.reduce((acc, item) => {
+        const itemPrice = item.desconto ? (item.price * item.desconto) : item.price;
+        return (itemPrice * item.quantidade) + acc;
+    }, 0)
+
+    console.log(cartItem)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -26,7 +35,7 @@ const FinalizarCompra = ({ navigation }) => {
                 <Endereco />
                 <Total style={{ borderLeftWidth: 10, borderLeftColor: corDoTexto }}>
                     <TextoTotal>Total</TextoTotal>
-                    <TextoTotal>R$ 15,00</TextoTotal>
+                    <TextoTotal>{formatCurrency(totalPrice, 'BRL')}</TextoTotal>
                 </Total>
                 <View style={{ alignItems: 'center', marginHorizontal: 35 }}>
                     <Botao

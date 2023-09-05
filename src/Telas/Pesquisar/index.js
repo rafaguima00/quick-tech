@@ -40,7 +40,8 @@ const Pesquisa = ({ navigation }) => {
             avaliacao: item.avaliacao,
             desc: item.descricao,
             id: item.id,
-            desconto: item.desconto
+            desconto: item.desconto,
+            quantidade: item.quantidade
         })
         navigation.navigate('Informações')
     }

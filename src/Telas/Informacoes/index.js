@@ -40,9 +40,9 @@ const Informacoes = ({ navigation }) => {
                 <ViewImage>
                     <Imagem source={{ uri: itemEscolhido.image }} />
                 </ViewImage>
-                <InfoProduto itemEscolhido={itemEscolhido} />
+                <InfoProduto />
                 <Quantidade />
-                <Descricao itemEscolhido={itemEscolhido} />
+                <Descricao />
                 <View style={{ alignItems: 'center', gap: 20, marginBottom: 36, marginHorizontal: 36 }}>
                     <Botao
                         children={'Adicionar ao carrinho'}

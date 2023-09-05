@@ -1,16 +1,10 @@
-import { View, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native'
+import { View, SafeAreaView, TouchableOpacity, Text } from 'react-native'
 import {
     Topo,
     TextoTopo,
     ContentProd,
     News,
-    Products,
-    BotaoProduto,
-    ImagemProduto,
-    InfoProduto,
-    Item,
-    NomeProduto,
-    Price
+    Products
 } from './style';
 import { useContext } from 'react';
 import { GlobalContext } from '../../Context/GlobalContext';
@@ -20,14 +14,15 @@ import { temaClaro } from '../../Tema';
 import { PesquisaContext } from '../../Context/PesquisaContext';
 import { CarrinhoContext } from '../../Context/CarrinhoContext';
 import UltimoVisto from './componentes/ultimosVistos';
+import IconeProduto from './componentes/iconeProduto';
 
 const Menu = ({ navigation }) => {
 
     const { dados } = useContext(GlobalContext)
     const { nome } = dados;
 
-    const { setItemEscolhido, itemEscolhido } = useContext(PesquisaContext)
-    const { produtoVisto, setUltimosVistos } = useContext(CarrinhoContext)
+    const { setItemEscolhido } = useContext(PesquisaContext)
+    const { cartItem } = useContext(CarrinhoContext)
 
     const { corDoTexto, bordaTopo } = temaClaro
 
@@ -52,7 +47,7 @@ const Menu = ({ navigation }) => {
             name: 'log-out',
             function: () => { navigation.replace('Login') }
         },
-    ]
+    ]  
 
     function retornarDados({ item }) {
         setItemEscolhido({
@@ -61,7 +56,9 @@ const Menu = ({ navigation }) => {
             avaliacao: item.avaliacao,
             price: item.price,
             image: item.image,
-            id: item.id
+            id: item.id,
+            desconto: item.desconto,
+            quantidade: item.quantidade
         })
         navigation.navigate('Informações')
     }
@@ -78,6 +75,25 @@ const Menu = ({ navigation }) => {
                         {options.map(item => (
                             <TouchableOpacity activeOpacity={0.4} key={item.id} onPress={item.function}>
                                 <Feather name={item.name} size={27} color={corDoTexto} />
+                                {(item.name == 'shopping-cart' && cartItem.length > 0 ) &&
+                                    <View
+                                        style={{
+                                            width: 18,
+                                            height: 18,
+                                            backgroundColor: 'red',
+                                            borderRadius: '50%',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            position: 'absolute',
+                                            right: -10,
+                                            top: -5
+                                        }}
+                                    >
+                                        <Text style={{ color: '#fff', fontWeight: 'bold' }}>
+                                            {cartItem.length}
+                                        </Text>
+                                    </View>
+                                }
                             </TouchableOpacity>
                         ))}
                     </View>
@@ -88,25 +104,7 @@ const Menu = ({ navigation }) => {
                         <News>Novidades</News>
                         <Products>
                             {produtos.map(item => (
-                                <BotaoProduto
-                                    key={item.id}
-                                    activeOpacity={0.9}
-                                    onPress={() => {
-                                        retornarDados({ item })
-                                        setUltimosVistos({ item })
-                                    }}
-                                >
-                                    <View style={{ alignItems: 'center' }}>
-                                        <ImagemProduto source={{ uri: item.image }} />
-                                    </View>
-                                    <InfoProduto>
-                                        <NomeProduto>{item.name}</NomeProduto>
-                                        <Item>
-                                            <Price>R$ {item.price}</Price>
-                                            <Feather name="star" size={14} color="#33bbc5" children={item.avaliacao} />
-                                        </Item>
-                                    </InfoProduto>
-                                </BotaoProduto>
+                                <IconeProduto item={item} retornarDados={retornarDados} />
                             ))}
                         </Products>
                     </View>
