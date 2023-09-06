@@ -16,6 +16,7 @@ const Login = ({ navigation }) => {
     const [erro, setErro] = useState(false)
     const [mensagemErro, setMensagemErro] = useState('')
     const [snackVisible, setSnackVisible] = useState(false)
+    const [secureText, setSecureText] = useState(true)
 
     const validarLogin = () => {
         if (email == '' || senha == '') {
@@ -34,9 +35,9 @@ const Login = ({ navigation }) => {
     return (
         <Container>
             <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'height' : 'padding'}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-                <ScrollView>
+                <ScrollView contentContainerStyle={{ height: '100%', justifyContent: 'center' }}>
                     <View style={{ alignItems: 'center' }}>
                         <Image source={require('../../../assets/logo.png')} />
                     </View>
@@ -57,8 +58,14 @@ const Login = ({ navigation }) => {
                             value={senha}
                             onChangeText={text => setDados({ ...dados, senha: text })}
                             error={senha == '' ? erro : ''}
-                            secureTextEntry
+                            secureTextEntry={secureText}
                             activeOutlineColor={corPrimaria}
+                            right={
+                                <TextInput.Icon 
+                                    icon={secureText ? "eye" : "eye-off"} 
+                                    onPress={() => setSecureText(!secureText)} 
+                                />
+                            }
                         />
                     </Form>
                     <View style={{ flexDirection: 'row', gap: 4, justifyContent: 'center' }}>

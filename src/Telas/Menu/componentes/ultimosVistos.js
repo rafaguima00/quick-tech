@@ -12,13 +12,16 @@ import {
     Price
 } from '../style'
 import { Icon } from "react-native-vector-icons/Feather"
+import { PesquisaContext } from "../../../Context/PesquisaContext"
+import formatCurrency from "../../../Utils/formatCurrency"
 
 const UltimoVisto = ({ retornarDados }) => {
+
+    const { ultimosVistos } = useContext(PesquisaContext)
 
     const renderItem = ({ item }) => {
         return (
             <BotaoProduto
-                key={item.id}
                 activeOpacity={0.9}
                 onPress={() => retornarDados({ item })}
             >
@@ -28,7 +31,7 @@ const UltimoVisto = ({ retornarDados }) => {
                 <InfoProduto>
                     <NomeProduto>{item.name}</NomeProduto>
                     <Item>
-                        <Price>R$ {item.price}</Price>
+                        <Price>{formatCurrency(item.price, 'BRL')}</Price>
                         <Icon name="star" size={14} color="#33bbc5" children={item.avaliacao} />
                     </Item>
                 </InfoProduto>
@@ -38,14 +41,14 @@ const UltimoVisto = ({ retornarDados }) => {
 
     return (
         <View>
-            {/* <UltimosVistos
+            <UltimosVistos
                 style={{ maxHeight: 250 }}
                 showsVerticalScrollIndicator={false}
                 data={{}}
-                key={item => item.id}
+                keyExtractor={item => item.id}
                 renderItem={renderItem}
                 ListHeaderComponent={() => <News>Últimos vistos</News>}
-            /> */}
+            />
         </View>
     )
 }

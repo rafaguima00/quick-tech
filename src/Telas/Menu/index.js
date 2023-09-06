@@ -4,7 +4,8 @@ import {
     TextoTopo,
     ContentProd,
     News,
-    Products
+    Products,
+    BotaoCarrinho
 } from './style';
 import { useContext } from 'react';
 import { GlobalContext } from '../../Context/GlobalContext';
@@ -15,6 +16,7 @@ import { PesquisaContext } from '../../Context/PesquisaContext';
 import { CarrinhoContext } from '../../Context/CarrinhoContext';
 import UltimoVisto from './componentes/ultimosVistos';
 import IconeProduto from './componentes/iconeProduto';
+import { ScrollView } from 'react-native';
 
 const Menu = ({ navigation }) => {
 
@@ -40,14 +42,14 @@ const Menu = ({ navigation }) => {
         {
             id: '3',
             name: 'heart',
-            function: () => { }
+            function: () => { navigation.navigate('Favoritos') }
         },
         {
             id: '4',
             name: 'log-out',
             function: () => { navigation.replace('Login') }
         },
-    ]  
+    ]
 
     function retornarDados({ item }) {
         setItemEscolhido({
@@ -65,41 +67,29 @@ const Menu = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <>
-                <Topo style={{ borderBottomWidth: 2, borderBottomColor: bordaTopo }}>
-                    <TouchableOpacity activeOpacity={0.4} onPress={() => navigation.openDrawer()}>
-                        <Feather name="menu" size={27} color={corDoTexto} />
-                    </TouchableOpacity>
-                    <TextoTopo>Olá, {nome ? nome : '[user_name]'}</TextoTopo>
-                    <View style={{ flexDirection: 'row', gap: 15 }}>
-                        {options.map(item => (
-                            <TouchableOpacity activeOpacity={0.4} key={item.id} onPress={item.function}>
-                                <Feather name={item.name} size={27} color={corDoTexto} />
-                                {(item.name == 'shopping-cart' && cartItem.length > 0 ) &&
-                                    <View
-                                        style={{
-                                            width: 18,
-                                            height: 18,
-                                            backgroundColor: 'red',
-                                            borderRadius: '50%',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            position: 'absolute',
-                                            right: -10,
-                                            top: -5
-                                        }}
-                                    >
-                                        <Text style={{ color: '#fff', fontWeight: 'bold' }}>
-                                            {cartItem.length}
-                                        </Text>
-                                    </View>
-                                }
-                            </TouchableOpacity>
-                        ))}
-                    </View>
-                </Topo>
+            <Topo style={{ borderBottomWidth: 2, borderBottomColor: bordaTopo }}>
+                <TouchableOpacity activeOpacity={0.4} onPress={() => navigation.openDrawer()}>
+                    <Feather name="menu" size={27} color={corDoTexto} />
+                </TouchableOpacity>
+                <TextoTopo>Olá, {nome ? nome : '[user_name]'}</TextoTopo>
+                <View style={{ flexDirection: 'row', gap: 15 }}>
+                    {options.map(item => (
+                        <TouchableOpacity activeOpacity={0.4} key={item.id} onPress={item.function}>
+                            <Feather name={item.name} size={27} color={corDoTexto} />
+                            {(item.name == 'shopping-cart' && cartItem.length > 0) &&
+                                <BotaoCarrinho>
+                                    <Text style={{ color: '#fff', fontWeight: 'bold' }}>
+                                        {cartItem.length}
+                                    </Text>
+                                </BotaoCarrinho>
+                            }
+                        </TouchableOpacity>
+                    ))}
+                </View>
+            </Topo>
+            <ScrollView>
                 <ContentProd>
-                    <UltimoVisto retornarDados={retornarDados} />
+                    {/* <UltimoVisto retornarDados={retornarDados} /> */}
                     <View>
                         <News>Novidades</News>
                         <Products>
@@ -109,7 +99,7 @@ const Menu = ({ navigation }) => {
                         </Products>
                     </View>
                 </ContentProd>
-            </>
+            </ScrollView>
         </SafeAreaView>
     )
 }

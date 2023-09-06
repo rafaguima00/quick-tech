@@ -9,8 +9,12 @@ import {
 import formatCurrency from '../../../Utils/formatCurrency';
 import { View } from 'react-native';
 import { Feather } from 'react-native-vector-icons'
+import { useContext } from 'react';
+import { PesquisaContext } from '../../../Context/PesquisaContext';
 
 const IconeProduto = ({ item, retornarDados }) => {
+
+    const { produtoVisto, itemEscolhido } = useContext(PesquisaContext)
 
     return (
         <BotaoProduto
@@ -25,11 +29,11 @@ const IconeProduto = ({ item, retornarDados }) => {
             </View>
             <InfoProduto>
                 <NomeProduto>{item.name}</NomeProduto>
-                <View 
-                    style={{ 
-                        flexDirection: 'row', 
-                        alignItems: 'flex-end', 
-                        justifyContent: 'space-between' 
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'flex-end',
+                        justifyContent: 'space-between'
                     }}
                 >
                     <Item>

@@ -28,6 +28,18 @@ export const TextoTopo = styled.Text`
     max-height: 70px;
 `
 
+export const BotaoCarrinho = styled.View`
+    width: 18px;
+    height: 18px;
+    background: red;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: -10;
+    top: -5;
+`
+
 export const ContentProd = styled.View`
     padding-top: 18px;
     min-height: 100%;

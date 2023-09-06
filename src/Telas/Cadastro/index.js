@@ -19,6 +19,10 @@ const Cadastro = ({ navigation }) => {
     const [erro, setErro] = useState(false)
     const [mensagemErro, setMensagemErro] = useState('')
     const [snackVisible, setSnackVisible] = useState(false)
+    const [secureText, setSecureText] = useState({
+        senha: true,
+        confirmaSenha: true
+    })
 
     const cpfInvalido = (cpfUser.isValid(cpf))
 
@@ -99,7 +103,13 @@ const Cadastro = ({ navigation }) => {
                             onChangeText={text => setDados({ ...dados, senha: text })}
                             error={senha == '' ? erro : ''}
                             activeOutlineColor={corPrimaria}
-                            secureTextEntry
+                            secureTextEntry={secureText.senha}
+                            right={
+                                <TextInput.Icon 
+                                    icon={secureText.senha ? "eye" : "eye-off"}
+                                    onPress={() => setSecureText({...secureText, senha: !senha})} 
+                                />
+                            }
                         />
                         <TextInput
                             label="Confirmar senha"
@@ -109,7 +119,13 @@ const Cadastro = ({ navigation }) => {
                             onChangeText={text => setDados({ ...dados, confirmaSenha: text })}
                             error={confirmaSenha == '' ? erro : ''}
                             activeOutlineColor={corPrimaria}
-                            secureTextEntry
+                            secureTextEntry={secureText.confirmaSenha}
+                            right={
+                                <TextInput.Icon 
+                                    icon={secureText.confirmaSenha ? "eye" : "eye-off"}
+                                    onPress={() => setSecureText({...secureText, confirmaSenha: !confirmaSenha})} 
+                                />
+                            }
                         />
                     </Form>
                     <View style={{ alignItems: 'center', paddingBottom: 12, marginHorizontal: 48 }}>
