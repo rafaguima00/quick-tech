@@ -8,6 +8,7 @@ import Pesquisa from '../Telas/Pesquisar';
 import Informacoes from '../Telas/Informacoes';
 import FinalizarCompra from '../Telas/FinalizarCompra';
 import CadastroCartao from '../Telas/CadastroCartao';
+import Favoritos from '../Telas/Favoritos';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ function StackNavigator() {
                 <Stack.Screen name="Informações" component={Informacoes} />
                 <Stack.Screen name="Finalizar compra" component={FinalizarCompra} />
                 <Stack.Screen name="Cadastrar cartão" component={CadastroCartao} />
+                <Stack.Screen name="Favoritos" component={Favoritos} />
             </Stack.Navigator>
         </NavigationContainer>
     )

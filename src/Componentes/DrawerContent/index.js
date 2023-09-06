@@ -37,7 +37,7 @@ const CustomDrawer = () => {
         {
             id: '5',
             name: 'Favoritos',
-            function: () => { },
+            function: () => { navigation.navigate('Favoritos') },
             icon: 'heart'
         },
         {
