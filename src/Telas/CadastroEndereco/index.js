@@ -43,6 +43,7 @@ const CadastroEndereco = ({ navigation }) => {
                 })
             }
         } catch {
+            setErro(true)
             setSnackVisible(true)
             setMensagemErro('CEP inválido')
         }
@@ -58,6 +59,10 @@ const CadastroEndereco = ({ navigation }) => {
             setErro(true)
             setSnackVisible(true)
             setMensagemErro('Preencha os campos vazios')
+        } else if(cep.length != 8) {
+            setErro(true)
+            setSnackVisible(true)
+            setMensagemErro('CEP inválido')
         } else {
             navigation.replace('Menu')
         }

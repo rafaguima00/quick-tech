@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import { Lista, EnderecoEntrega, InfoEndereco } from '../style'
+import { Lista, EnderecoEntrega, InfoEndereco, TextoCarrinhoVazio } from '../style'
 import { Feather } from 'react-native-vector-icons'
 import { useContext } from "react";
 import { GlobalContext } from '../../../Context/GlobalContext'
@@ -35,7 +35,7 @@ const Endereco = () => {
                     <InfoEndereco>CEP: {cep}</InfoEndereco>
                     <InfoEndereco>{rua}, {numero ? numero : 's/n'} - {bairro} - {cidade} - {estado}</InfoEndereco>
                     <InfoEndereco>Complemento: {complemento}</InfoEndereco>
-                </View>
+                </View> || <TextoCarrinhoVazio>Preencha os dados do seu endereço para avançar</TextoCarrinhoVazio>
             }
         </Lista>
     )

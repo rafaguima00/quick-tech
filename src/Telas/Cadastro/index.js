@@ -24,7 +24,7 @@ const Cadastro = ({ navigation }) => {
         confirmaSenha: true
     })
 
-    const cpfInvalido = (cpfUser.isValid(cpf))
+    const cpfValido = (cpfUser.isValid(cpf))
 
     const validarCadastro = () => {
         if (email == '' || senha == '' || confirmaSenha == '' || nome == '' || cpf == '' || cel == '') {
@@ -39,7 +39,7 @@ const Cadastro = ({ navigation }) => {
             setErro(true)
             setSnackVisible(true)
             setMensagemErro('A senha deve conter 6 ou mais caracteres')
-        } else if (cpfInvalido == false) {
+        } else if (!cpfValido) {
             setErro(true)
             setSnackVisible(true)
             setMensagemErro('CPF inválido')

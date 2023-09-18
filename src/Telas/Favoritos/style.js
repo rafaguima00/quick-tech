@@ -13,7 +13,7 @@ export const Topo = styled.View`
 
 export const TextoTopo = styled.Text`
     font-family: ${fonteRegular};
-    font-size: 17px;
+    font-size: 19px;
     color: #7d7d7d;
 `
 
@@ -48,4 +48,12 @@ export const ItemFavorito = styled.View`
     flex-direction: row;
     align-items: center;
     gap: 8px;
+`
+
+export const TextoFavoritoVazio = styled.Text`
+    font-family: ${fonteRegular};
+    font-size: 16px;
+    color: #7d7d7d;
+    padding: 16px;
+    text-align: center;
 `

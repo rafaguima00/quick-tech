@@ -89,4 +89,10 @@ export const Desc = styled.Text`
     font-size: 15px;
     color: ${corDoTexto};
     max-height: 148px;
+    text-align: justify;
+`
+
+export const MostrarMais = styled.Text`
+    color: #7d7d7d;
+    font-family: ${fonteNegrito};
 `

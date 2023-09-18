@@ -21,11 +21,21 @@ import { Feather } from 'react-native-vector-icons'
 import { useContext } from 'react'
 import { CarrinhoContext } from '../../../Context/CarrinhoContext'
 import { FlatList } from 'react-native'
-import formatCurrency from '../../../Utils/formatCurrency'
+import formatCurrency from '../../../Servicos/formatCurrency'
 
 const Carrinho = () => {
 
     const { cartItem, setCartItem } = useContext(CarrinhoContext)
+
+    const precoFinal = (item) => {
+        const precoComDesconto = (
+            item.desconto ? 
+            (item.price * item.desconto) * item.quantidade :
+            item.price * item.quantidade
+        ) 
+
+        return precoComDesconto
+    }
 
     const handleRemoveItem = ( itemSelecionado ) => {
         const updatedItems = cartItem.filter(item => item.id != itemSelecionado)
@@ -99,11 +109,7 @@ const Carrinho = () => {
                             </View>
                         </Options>
                         <PrecoProduto>
-                            {
-                                item.desconto != 0 ?
-                                formatCurrency((item.price * item.desconto) * item.quantidade, 'BRL') :
-                                formatCurrency(item.price * item.quantidade, 'BRL')
-                            }
+                            {formatCurrency(precoFinal(item), 'BRL')}
                         </PrecoProduto>
                     </InformacoesProd>
                 </Produto>

@@ -6,19 +6,26 @@ import { Total, TextoTotal } from './style'
 import { temaClaro } from '../../Tema'
 import { Botao } from '../../Componentes/Botao/botao'
 import { useContext } from 'react'
-import formatCurrency from '../../Utils/formatCurrency'
+import formatCurrency from '../../Servicos/formatCurrency'
 import { CarrinhoContext } from '../../Context/CarrinhoContext'
+import { GlobalContext } from '../../Context/GlobalContext'
 
 const { corDoTexto } = temaClaro
 
 const FinalizarCompra = ({ navigation }) => {
 
     const { cartItem } = useContext(CarrinhoContext)
+    const { dadosEndereco } = useContext(GlobalContext)
 
     const totalPrice = cartItem.reduce((acc, item) => {
         const itemPrice = item.desconto ? (item.price * item.desconto) : item.price;
         return (itemPrice * item.quantidade) + acc;
     }, 0)
+
+    const avancar = () => {
+        (cartItem.length > 0 && dadosEndereco.cep ) &&
+        navigation.navigate('Cadastrar cartão')
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -40,10 +47,11 @@ const FinalizarCompra = ({ navigation }) => {
                         children={'Continuar'}
                         corDeFundo={corDoTexto}
                         negrito
-                        aoPressionar={() => navigation.navigate('Cadastrar cartão')}
+                        aoPressionar={avancar}
                     />
                 </View>
             </View>
+            {/* reaproveitar o snackbar e adicioná-lo aqui */}
         </SafeAreaView>
     )
 }

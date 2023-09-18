@@ -23,12 +23,24 @@ export function InfoProvider({ children }) {
         complemento: ''
     })
 
+    const [dadosCartao, setDadosCartao] = useState({
+        numero: '',
+        titular: '',
+        validade: '',
+        cvc: ''
+    })
+
+    const value = {
+        dados, 
+        setDados, 
+        dadosEndereco, 
+        setDadosEndereco,
+        dadosCartao,
+        setDadosCartao
+    }
+
     return (
-        <GlobalContext.Provider
-            value={{
-                dados, setDados, dadosEndereco, setDadosEndereco
-            }}
-        >
+        <GlobalContext.Provider value={value}>
             {children}
         </GlobalContext.Provider>
     )

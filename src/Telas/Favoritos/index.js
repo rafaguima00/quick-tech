@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, TouchableOpacity, Alert } from 'react-native'
+import { Text, SafeAreaView, TouchableOpacity, Alert, FlatList } from 'react-native'
 import { Snackbar } from 'react-native-paper';
 import { MaterialIcons, Feather } from 'react-native-vector-icons'
 import {
@@ -8,7 +8,8 @@ import {
     Item,
     TextoItem,
     ItensFavoritos,
-    ItemFavorito
+    ItemFavorito,
+    TextoFavoritoVazio
 } from './style'
 import { useContext, useState } from 'react';
 import { PesquisaContext } from '../../Context/PesquisaContext';
@@ -24,10 +25,8 @@ const Favoritos = ({ navigation }) => {
         const addItem = handleFavorite(item)
         if (addItem == 'removido') {
             setMensagemSnack(`${item.name} removido dos favoritos`)
-
         } else if (addItem == 'adicionado') {
             setMensagemSnack(`${item.name} adicionado aos favoritos`)
-
         } else {
             setMensagemSnack('erro ao adicionar/remover favorito')
         }
@@ -47,6 +46,47 @@ const Favoritos = ({ navigation }) => {
         navigation.navigate('Informações')
     }
 
+    const renderItem = ({ item }) => {
+        return (
+            <Item
+                activeOpacity={0.4}
+                style={{
+                    borderBottomWidth: 1.5,
+                    borderBottomColor: 'rgba(125,125,125,0.25)'
+                }}
+                onPress={() => retornarDados({ item })}
+            >
+                <ItemFavorito>
+                    <Imagem source={{ uri: item.image }} />
+                    <TextoItem>{item.name}</TextoItem>
+                </ItemFavorito>
+                <TouchableOpacity
+                    activeOpacity={0.4}
+                    onPress={() => {
+                        Alert.alert(
+                            "Remover item",
+                            `Tem certeza que deseja remover ${item.name} da lista de favoritos?`,
+                            [
+                                {
+                                    text: "OK",
+                                    onPress: () => {
+                                        salvarFavorito(item)
+                                        setSnackVisible(true)
+                                    }
+                                },
+                                {
+                                    text: "Cancelar"
+                                }
+                            ]
+                        )
+                    }}
+                >
+                    <Feather name="trash-2" size={22} color={'#BB2525'} />
+                </TouchableOpacity>
+            </Item>
+        )
+    }
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <Topo>
@@ -55,47 +95,14 @@ const Favoritos = ({ navigation }) => {
                 </TouchableOpacity>
                 <TextoTopo>Favoritos</TextoTopo>
             </Topo>
-            { favorito ? <ItensFavoritos>
-                {favorito.map(item => (
-                    <Item
-                        key={item.id}
-                        activeOpacity={0.4}
-                        style={{
-                            borderBottomWidth: 1.5,
-                            borderBottomColor: 'rgba(125,125,125,0.25)'
-                        }}
-                        onPress={() => retornarDados({ item })}
-                    >
-                        <ItemFavorito>
-                            <Imagem source={{ uri: item.image }} />
-                            <TextoItem>{item.name}</TextoItem>
-                        </ItemFavorito>
-                        <TouchableOpacity
-                            activeOpacity={0.4}
-                            onPress={() => {
-                                Alert.alert(
-                                    "Remover item",
-                                    `Tem certeza que deseja remover ${item.name} dos seus favoritos?`,
-                                    [
-                                        {
-                                            text: "OK",
-                                            onPress: () => {
-                                                salvarFavorito(item)
-                                                setSnackVisible(true)
-                                            }
-                                        },
-                                        {
-                                            text: "Cancelar"
-                                        }
-                                    ]
-                                )
-                            }}
-                        >
-                            <Feather name="trash-2" size={22} color={'#BB2525'} />
-                        </TouchableOpacity>
-                    </Item>
-                ))}
-            </ItensFavoritos> : <Text>Ola</Text>}
+            <ItensFavoritos>
+                <FlatList
+                    data={favorito}
+                    keyExtractor={item => item.id}
+                    renderItem={renderItem}
+                    ListEmptyComponent={() => <TextoFavoritoVazio>Nenhum item adicionado aos favoritos no momento.</TextoFavoritoVazio>}
+                />
+            </ItensFavoritos>
             <Snackbar
                 visible={snackVisible}
                 onDismiss={() => setSnackVisible(false)}

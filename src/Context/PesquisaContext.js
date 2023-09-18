@@ -7,15 +7,9 @@ export function PesquisaProvider({ children }) {
     const [pesquisar, setPesquisar] = useState('')
     const [itensFiltrados, setItensFiltrados] = useState([])
     const [itemEscolhido, setItemEscolhido] = useState({})
-    const [ultimosVistos, setUltimosVistos] = useState(null)
+    const [produtoVisto, setProdutoVisto] = useState([])
     const [favorito, setFavorito] = useState([])
     const [handleBotaoFav, setHandleBotaoFav] = useState(false)
-
-    const produtoVisto = ({produtos}) => {
-        let novoUltimosVistos = new Set(ultimosVistos)
-        novoUltimosVistos.add(produtos)
-        setUltimosVistos([{...novoUltimosVistos}])
-    }
 
     const handleFavorite = (produto) => {
         const itemExistente = favorito.find(item => item.id == produto.id)
@@ -30,6 +24,12 @@ export function PesquisaProvider({ children }) {
         }
     }
 
+    const handleProdutoVisto = (itemClicado) => {
+        let novoProdutoVisto = new Set(produtoVisto)
+        novoProdutoVisto.add(itemClicado)
+        setProdutoVisto([...novoProdutoVisto])
+    }
+
     const value = {
         pesquisar, 
         setPesquisar, 
@@ -37,14 +37,14 @@ export function PesquisaProvider({ children }) {
         setItensFiltrados, 
         itemEscolhido, 
         setItemEscolhido,
-        produtoVisto,
-        ultimosVistos, 
-        setUltimosVistos,
+        produtoVisto, 
+        setProdutoVisto,
         favorito,
         setFavorito,
         handleFavorite,
         handleBotaoFav,
-        setHandleBotaoFav
+        setHandleBotaoFav,
+        handleProdutoVisto
     }
 
     return (

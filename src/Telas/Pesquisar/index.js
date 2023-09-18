@@ -19,7 +19,8 @@ const Pesquisa = ({ navigation }) => {
         setPesquisar,
         itensFiltrados,
         setItensFiltrados,
-        setItemEscolhido
+        setItemEscolhido,
+        handleProdutoVisto
     } = useContext(PesquisaContext)
 
     function filtrarItens(text) {
@@ -67,7 +68,10 @@ const Pesquisa = ({ navigation }) => {
                                 }}
                                 key={item.id}
                                 activeOpacity={0.4}
-                                onPress={() => retornarDados({ item })}
+                                onPress={() => {
+                                    retornarDados({ item })
+                                    handleProdutoVisto(item)
+                                }}
                             >
                                 <Imagem source={{ uri: item.image }} />
                                 <TextoItem>{item.name}</TextoItem>

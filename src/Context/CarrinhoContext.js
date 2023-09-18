@@ -1,5 +1,4 @@
 import { createContext, useState, useContext } from "react";
-import { PesquisaContext } from "./PesquisaContext";
 
 export const CarrinhoContext = createContext({})
 

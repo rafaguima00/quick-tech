@@ -6,7 +6,7 @@ import {
     NomeProduto,
     Price
 } from '../style';
-import formatCurrency from '../../../Utils/formatCurrency';
+import formatCurrency from '../../../Servicos/formatCurrency';
 import { View } from 'react-native';
 import { Feather } from 'react-native-vector-icons'
 import { useContext } from 'react';
@@ -14,7 +14,7 @@ import { PesquisaContext } from '../../../Context/PesquisaContext';
 
 const IconeProduto = ({ item, retornarDados }) => {
 
-    const { produtoVisto, itemEscolhido } = useContext(PesquisaContext)
+    const { handleProdutoVisto } = useContext(PesquisaContext)
 
     return (
         <BotaoProduto
@@ -22,13 +22,14 @@ const IconeProduto = ({ item, retornarDados }) => {
             activeOpacity={0.9}
             onPress={() => {
                 retornarDados({ item })
+                handleProdutoVisto(item)
             }}
         >
+            <NomeProduto numberOfLines={2} style={{paddingLeft: 6}}>{item.name}</NomeProduto>
             <View style={{ alignItems: 'center' }}>
                 <ImagemProduto source={{ uri: item.image }} />
             </View>
             <InfoProduto>
-                <NomeProduto>{item.name}</NomeProduto>
                 <View
                     style={{
                         flexDirection: 'row',

@@ -68,7 +68,7 @@ export const Products = styled.View`
 export const BotaoProduto = styled.TouchableOpacity`
     background-color: ${corBotao};
     width: 180px;
-    padding: 12px 0;
+    padding: 10px 0;
     border-radius: 12px;
     border: solid 1.5px ${corDaBorda};
     margin: 9px 0 9px 17px;
@@ -76,25 +76,24 @@ export const BotaoProduto = styled.TouchableOpacity`
 `
 
 export const ImagemProduto = styled.Image`
-    width: 130px;
-    height: 130px;
-    border-radius: 8px;
-    border: solid 2px ${corDoTexto};
-    margin-bottom: 8px;
+    width: 180px;
+    height: 136px;
+    margin: 4px 0;
 `
 
 export const InfoProduto = styled.View`
     margin: 0 12px;
     gap: 8px;
     justify-content: space-between;
-    height: 90px;
+    max-height: 45px;
     box-sizing: border-box;
 `
 
 export const NomeProduto = styled.Text`
+    padding: 0;
     color: ${corDoTexto};
     font-family: ${fonteNegrito};
-    max-height: 52px;
+    height: 34px;
 `
 
 export const Item = styled.View`
@@ -106,4 +105,33 @@ export const Item = styled.View`
 export const Price = styled.Text`
     color: #33bbc5;
     font-family: ${fonteNegrito};
+`
+
+export const BotaoProdVisto = styled.TouchableOpacity`
+    background-color: ${corBotao};
+    width: 200px;
+    padding: 10px;
+    border-radius: 12px;
+    border: solid 1.5px ${corDaBorda};
+    margin: 9px 0 9px 17px;
+    box-shadow: 0 1px 1.5px #000;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+`
+
+export const ImagemProdVisto = styled.Image`
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    border: solid 2px ${corDoTexto};
+    margin-bottom: 8px;
+`
+
+export const InfoProdVisto = styled.View`
+    margin: 0 12px;
+    box-sizing: border-box;
+    width: 100px;
+    align-items: flex-start;
+    gap: 6px;
 `
