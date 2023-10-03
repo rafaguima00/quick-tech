@@ -24,7 +24,7 @@ const Cadastro = ({ navigation }) => {
         confirmaSenha: true
     })
 
-    const cpfValido = (cpfUser.isValid(cpf))
+    const cpfValido = cpfUser.isValid(cpf)
 
     const validarCadastro = () => {
         if (email == '' || senha == '' || confirmaSenha == '' || nome == '' || cpf == '' || cel == '') {
@@ -92,7 +92,7 @@ const Cadastro = ({ navigation }) => {
                             keyboardType='number-pad'
                             value={cpf}
                             onChangeText={text => setDados({ ...dados, cpf: text })}
-                            error={cpfInvalido == false ? erro : ''}
+                            error={!cpfValido ? erro : ''}
                             activeOutlineColor={corPrimaria}
                         />
                         <TextInput

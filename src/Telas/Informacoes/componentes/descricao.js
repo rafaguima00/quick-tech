@@ -2,39 +2,32 @@ import { View, TouchableOpacity, Text } from 'react-native'
 import { NameProduct, Desc, MostrarMais } from '../style'
 import { useContext, useState } from 'react'
 import { PesquisaContext } from '../../../Context/PesquisaContext'
+import SeeMore from 'react-native-see-more-inline'
+import { temaClaro } from '../../../Tema'
+
+const { corDoTexto } = temaClaro
 
 const Descricao = () => {
 
     const { itemEscolhido } = useContext(PesquisaContext)
 
-    const [showMore, setShowMore] = useState(false);
-    const [numberOfLines, setNumberOfLines] = useState(5);
-
-    const handleTextLayout = ({ nativeEvent }) => {
-        const shouldShowMore = nativeEvent.lines.length > numberOfLines;
-        setShowMore(shouldShowMore);
-    };
-
-    const onPressShowMore = () => {
-        setNumberOfLines(numberOfLines ? null : 5);
-    };
-
-
     return (
         <View style={{ marginHorizontal: 36, marginVertical: 20 }}>
             <NameProduct>Descrição</NameProduct>
-            <Desc numberOfLines={numberOfLines} onTextLayout={handleTextLayout}>
+            <SeeMore
+                numberOfLines={5}
+                style={{
+                    fontFamily: 'Inter_400Regular',
+                    fontSize: 16,
+                    color: corDoTexto,
+                    textAlign: 'justify',
+                    maxHeight: 148
+                }}
+            >
                 {itemEscolhido.desc}
-            </Desc>
-            {showMore &&
-                <TouchableOpacity activeOpacity={1} onPress={onPressShowMore}>
-                    <MostrarMais style={{ textAlign: 'right', paddingTop: 12 }}>
-                        {numberOfLines ? 'Mostrar mais...' : 'Mostrar menos'}
-                    </MostrarMais>
-                </TouchableOpacity>
-            }
+            </SeeMore>
         </View>
     )
 }
 
-export default Descricao
+export default Descricao;
