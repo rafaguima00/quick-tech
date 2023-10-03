@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Imagem, Item, ItensFiltrados, TextoEscrito, TextoItem } from "./style";
 import { useContext } from "react";
-import { produtos } from '../../mocks/produtos'
+import { produtos } from '../../Mocks/produtos'
 import { MaterialIcons } from 'react-native-vector-icons'
 import { PesquisaContext } from '../../Context/PesquisaContext'
 

@@ -15,7 +15,7 @@ import {
 } from './style';
 import { useContext } from 'react';
 import { GlobalContext } from '../../Context/GlobalContext';
-import { produtos } from '../../mocks/produtos';
+import { produtos } from '../../Mocks/produtos';
 import { Feather } from 'react-native-vector-icons'
 import { temaClaro } from '../../Tema';
 import { PesquisaContext } from '../../Context/PesquisaContext';
